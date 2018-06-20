@@ -15,6 +15,14 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "BearBones": [
+        "dist/bear-bones"
+      ],
+      "BearBones/*": [
+        "dist/bear-bones/*"
+      ]
+    }
   }
 }

@@ -116,6 +116,46 @@
           }
         }
       }
+    },
+    "BearBones": {
+      "root": "projects/bear-bones",
+      "sourceRoot": "projects/bear-bones/src",
+      "projectType": "library",
+      "prefix": "bb",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/bear-bones/tsconfig.lib.json",
+            "project": "projects/bear-bones/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/bear-bones/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/bear-bones/src/test.ts",
+            "tsConfig": "projects/bear-bones/tsconfig.spec.json",
+            "karmaConfig": "projects/bear-bones/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/bear-bones/tsconfig.lib.json",
+              "projects/bear-bones/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "UAT-BearBones"

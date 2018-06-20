@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ContentChildren, QueryList, ChangeDetectorRef, ViewContainerRef } from '@angular/core';
+import { NavigationLink, MenuInput } from './menu-items/menu-items.components';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title = '@UAT/BearBones';
+
+  constructor() {
+  }
+
+  ngOnInit() {
+  }
 }
+
+
+
