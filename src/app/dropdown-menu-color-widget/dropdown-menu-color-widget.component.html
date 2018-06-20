@@ -1,0 +1,43 @@
+<h2>Dropdown Menus</h2>
+<p>
+  Simple dropdown menus that project arbitrary content
+  the same as the hamburger menu and the collapsing menu.
+</p>
+<p>
+  These can also be controlled with the showOnHover and 
+  toggleOnClick input flags.  Here both are set to true.
+</p>
+<div class="color-picker">
+  <div class="quick-menu">
+    <div bb-dropdown-menu
+      #ddmenu1="bbDropdownMenu"
+      [showOnHover]="true">
+      <a bb-menu-toggle class="nav-link">Primary</a>
+      <a bb-menu-item class="nav-link" (click)="setColor('red')">Red</a>
+      <a bb-menu-item class="nav-link" (click)="setColor('green')">Green</a>
+      <a bb-menu-item class="nav-link" (click)="setColor('blue')">Blue</a>
+    </div>
+    <div bb-dropdown-menu
+      #ddmenu2="bbDropdownMenu"
+      [showOnHover]="true">
+      <a bb-menu-toggle class="nav-link">CMYK</a>
+      <a bb-menu-item class="nav-link" (click)="setColor('cyan')">Cyan</a>
+      <a bb-menu-item class="nav-link" (click)="setColor('magenta')">Magenta</a>
+      <a bb-menu-item class="nav-link" (click)="setColor('yellow')">Yellow</a>
+      <a bb-menu-item class="nav-link" (click)="setColor('black')">Black</a>
+    </div>
+    <div bb-dropdown-menu
+      #ddmenu3="bbDropdownMenu"
+      [showOnHover]="true">
+      <a bb-menu-toggle class="nav-link">Other</a>
+      <a bb-menu-item class="nav-link" (click)="setColor('white')">White</a>
+      <a bb-menu-item class="nav-link" (click)="setColor('orange')">Orange</a>
+      <a bb-menu-item class="nav-link" (click)="setColor('purple')">Purple</a>
+      <a bb-menu-item class="nav-link" (click)="setColor('pink')">Pink</a>
+    </div>
+
+  </div>
+  <app-color-viewer
+    [viewedColor]="myColor">
+  </app-color-viewer>
+</div>

@@ -1,0 +1,17 @@
+<div class="dropdown-anchor">
+  <input #dropdownInput
+		 (keydown)="onKeyDown($event)"
+		 [attr.placeholder]="placeholderText"/>
+  	<div bb-sliding-panel
+	     class="results" 
+		 slideDirection="down"
+		 #panel="bbSlidingPanel">
+		 <ul bb-dropdown-input-items-list
+		 	#dropdownList
+		    [dynamicComponentsData]="diServ.items$ | async"
+			(listItemMouseOver)="onListItemMouseOver($event)"
+			(listItemClick)="onListItemClicked($event)"
+			(newContainers)="onNewItemContainers($event)">
+		 </ul>
+  	</div>	
+</div>

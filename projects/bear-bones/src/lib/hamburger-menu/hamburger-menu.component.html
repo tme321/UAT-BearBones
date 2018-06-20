@@ -1,0 +1,24 @@
+<div class="menu-container">
+  <ng-content select="[bb-fixed-content]"></ng-content>
+
+  <div bb-sliding-panel
+      class="menu-items-container"
+      slideDirection="down"
+      #panel="bbSlidingPanel">
+    <div class="menu-items">
+      <ng-content select="[bb-menu-item]"></ng-content>
+    </div>
+    <div class="menu-items-right">
+      <ng-content select="[bb-menu-item-right]"></ng-content>
+    </div>
+  </div>
+  
+  <div [bb-sliding-panel-toggle]="panel"
+       #toggle="bbSlidingPanelToggle" 
+       [toggleOnClick]="toggleOnClick"
+       [showOnHover]="showOnHover"
+       [showOnInit]="expanded"
+       [closeOnClickOutside]="closeOnClickOutside">
+      <ng-content select="[bb-menu-toggle]"></ng-content>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="slide-container">
+  <div [bb-sliding-panel-toggle]="panel" 
+    [toggleOnClick]="pinOnClick"
+    [showOnHover]="showOnMouseOver"
+    [closeOnClickOutside]="closeOnClickOutside">
+    <ng-content select="[bb-menu-toggle]"></ng-content>
+  </div>
+  <div class="slide-position">
+    <div class="slide-anchor">
+      <div bb-sliding-panel 
+        #panel="bbSlidingPanel"
+        [slideDirection]="slideDirection">
+          <ng-content select="[bb-menu-item]"></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

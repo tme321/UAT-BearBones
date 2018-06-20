@@ -1,0 +1,71 @@
+div.menu-container {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    min-height: inherit;
+    max-height: inherit;
+    height: inherit;
+}
+
+:host.bb-hamburger-menu.expanded div.menu-items-container {
+    display:flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: space-between;
+}
+
+:host.bb-hamburger-menu.expanded div.menu-items,
+:host.bb-hamburger-menu.expanded div.menu-items-right {
+    display:flex;
+    flex-direction: row;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+}
+
+:host.bb-hamburger-menu.expanded div.menu-items-right {
+    justify-content: flex-end;
+}
+
+:host.bb-hamburger-menu.collapsed div.menu-items-container {
+    display:flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+:host.bb-hamburger-menu.collapsed div.menu-items,
+:host.bb-hamburger-menu.collapsed div.menu-items-right {
+    display:flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+}
+
+:host.bb-hamburger-menu.expanded div.bb-sliding-panel-toggle {
+    visibility: hidden;
+    width:0;
+}
+
+div.bb-sliding-panel-toggle {
+    display: inline-block;
+}
+
+:host.collapsed div.menu-items-container {
+    position: absolute;
+    top:100%;
+    left:0;
+    right:0;
+}
+
+:host.collapsed div.menu-container {
+    justify-content: space-between;
+}
+
+div.menu-items {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+}

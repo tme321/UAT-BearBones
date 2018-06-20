@@ -1,0 +1,20 @@
+<div class="menu-container">
+  <div #displayedItems class="displayed">
+  </div>
+
+  <div  #toggle
+        [class.hidden]="!hasOverflow" 
+        [bb-sliding-panel-toggle]="panel"
+        [toggleOnClick]="toggleOnClick"
+        [closeOnClickOutside]="closeOnClickOutside"
+        [showOnHover]="showOnHover">
+    
+    <ng-content select="[bb-menu-toggle]"></ng-content>
+  </div>
+  <div bb-sliding-panel 
+       #panel="bbSlidingPanel"
+       #collapsedItems 
+       slideDirection="down"
+       #panel="bbSlidingPanel">
+  </div>
+</div>

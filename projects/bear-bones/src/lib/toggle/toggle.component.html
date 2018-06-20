@@ -1,0 +1,6 @@
+<div *ngIf="!state">
+  <ng-content select="[bb-open]"></ng-content>
+</div>
+<div *ngIf="state">
+  <ng-content select="[bb-close]"></ng-content>
+</div>
