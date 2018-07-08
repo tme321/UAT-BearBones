@@ -16,7 +16,7 @@ import { FooComponent } from './home/foo.component';
 import { DemoDropdownInputService } from './demo-dropdown-service/demo-dropdown-input.service';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 
-import { BBCollapsingMenuModule, BBCommonModule, BBDragAndDropModule, BBDropdownInputModule, BBDropdownMenuModule, BBHamburgerMenuModule, BBMultiSelectModule, BBSlideoutMenuModule, BBSlidingPanelModule, BBDropdownInputServiceToken } from 'BearBones';
+import { BBCollapsingMenuModule, BBCommonModule, BBDragAndDropModule, BBDropdownInputModule, BBDropdownMenuModule, BBHamburgerMenuModule, BBMultiSelectModule, BBSlideoutMenuModule, BBSlidingPanelModule, BBDropdownInputServiceToken, BBAlternatingPanelModule } from 'BearBones';
 
 const BBModules = [  
   BBCollapsingMenuModule.forRoot(), 
@@ -27,7 +27,8 @@ const BBModules = [
   BBHamburgerMenuModule.forRoot(), 
   BBMultiSelectModule.forRoot(), 
   BBSlideoutMenuModule.forRoot(), 
-  BBSlidingPanelModule.forRoot(),  
+  BBSlidingPanelModule.forRoot(),
+  BBAlternatingPanelModule.forRoot(),  
 ];
 
 function dddisFactory() { 
@@ -59,7 +60,7 @@ function dddisFactory() {
     ...BBModules,
   ],
   providers: [
-    { provide: BBDropdownInputServiceToken, useClass: DemoDropdownInputService}
+    { provide: BBDropdownInputServiceToken, useClass: DemoDropdownInputService},
   ],
   entryComponents: [
     NavigationLink,

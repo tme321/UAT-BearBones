@@ -3,6 +3,7 @@
  */
 
  // individual exports
+export * from './lib/alternating-panel/index';
 export * from './lib/sliding-panel/index';
 export * from './lib/dropdown-menu/index';
 export * from './lib/slideout-menu/index';
@@ -15,6 +16,7 @@ export * from './lib/drag-and-drop-component/index';
 export * from './lib/tab/index';
 export * from './lib/drag-and-drop/index';
 export * from './lib/sortable/index';
+export * from './lib/animation-states/index';
 
 // everything (is this necessary?)
 export * from './lib/bear-bones.module';

@@ -48,3 +48,26 @@
 
 	<router-outlet></router-outlet>
 </div>
+
+<button (click)="toggle()">Toggle</button>
+<div bb-alt-panel
+	#altPanel="bbAltPanel"
+	[css]="{ panel: 'alt-panel', state1: 'bb-open', state2: 'bb-closed'}">
+	This should be a sliding panel.
+</div> 
+
+<button (click)="otherToggle()">Toggle</button>
+<div class="alt-panel" bbAlternatingPanel 
+	[transitions]="trans" 
+	[state]="state"
+	[css]="{ 'open': 'bb-open', 'closed' : 'bb-closed'}"
+	>
+</div>
+
+<button (click)="otherToggle2()">Toggle</button>
+<div class="alt-panel" bbAlternatingPanel 
+	[transitions]="trans" 
+	[state]="state2"
+	[css]="{ 'open': 'bb-open', 'closed' : 'bb-closed'}"
+	>
+</div>

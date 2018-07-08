@@ -11,12 +11,12 @@ import { BBSlidingPanelToggle } from './toggle/sliding-panel-toggle.directive';
   
   declarations: [
     BBSlidingPanel, 
-    BBSlidingPanelToggle
+    BBSlidingPanelToggle, 
   ],
 
   exports: [
     BBSlidingPanel, 
-    BBSlidingPanelToggle
+    BBSlidingPanelToggle,
   ]
 })
 export class BBSlidingPanelModule { 
