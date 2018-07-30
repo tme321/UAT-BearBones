@@ -1,17 +1,17 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import { BBSlidingPanelModule } from './sliding-panel/index';
-import { BBDropdownMenuModule } from './dropdown-menu/index';
-import { BBSlideoutMenuModule } from './slideout-menu/index';
-import { BBDropdownInputModule } from './dropdown-input/index';
-import { BBHamburgerMenuModule } from './hamburger-menu/index';
-import { BBCollapsingMenuModule } from './collapsing-menu/index';
-import { BBMultiSelectModule } from './multi-select/index';
-import { BBCommonModule } from './common/index';
-import { BBDragAndDropComponentModule } from './drag-and-drop-component/index';
-import { BBTabModule } from './tab/index';
-import { BBDragAndDropModule } from './drag-and-drop/index';
-import { BBSortableModule } from './sortable/index';
+import { BBSlidingPanelModule } from './sliding-panel';
+import { BBDropdownMenuModule } from './dropdown-menu';
+import { BBSlideoutMenuModule } from './slideout-menu';
+import { BBDropdownInputModule } from './dropdown-input';
+import { BBHamburgerMenuModule } from './hamburger-menu';
+import { BBCollapsingMenuModule } from './collapsing-menu';
+import { BBMultiSelectModule } from './multi-select';
+import { BBCommonModule } from './common';
+import { BBDragAndDropComponentModule } from './drag-and-drop-component';
+import { BBTabModule } from './tab';
+import { BBDragAndDropModule } from './drag-and-drop';
+import { BBSortableModule } from './sortable';
 
 const BB_MODULES = [
     BBSlidingPanelModule,

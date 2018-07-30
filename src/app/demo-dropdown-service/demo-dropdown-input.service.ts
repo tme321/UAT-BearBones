@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable ,  BehaviorSubject } from 'rxjs';
-import { DropdownInputService, DropdownItemComponentData } from 'BearBones';
+import { DropdownInputService, DropdownItemComponentData } from 'BearBones/uat-bearbones';
 import { NavigationLink } from '../menu-items/menu-items.components';
 
 /**

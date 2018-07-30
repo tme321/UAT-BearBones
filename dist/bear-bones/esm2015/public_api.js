@@ -6,21 +6,24 @@
  * Public API Surface of bear-bones
  */
 // individual exports
-export { AltPanelState1Animation, AltPanelState2Animation, BBAlternatingPanelComponent, BBAlternatingPanelDirective, BBAlternatingPanelModule } from './lib/alternating-panel/index';
-export { BBSlidingPanelModule, BBSlidingPanel, BBSlidingPanelToggle } from './lib/sliding-panel/index';
-export { BBDropdownMenuModule, BBDropdownMenu } from './lib/dropdown-menu/index';
-export { BBSlideoutMenuModule, BBSlideoutMenu } from './lib/slideout-menu/index';
-export { BBDropdownInputModule, BBDropdownInputServiceToken, BBDropdownInput } from './lib/dropdown-input/index';
-export { BBHamburgerMenuModule, BBHamburgerMenu } from './lib/hamburger-menu/index';
-export { BBCollapsingMenuModule, BBCollapsingMenu } from './lib/collapsing-menu/index';
-export { BBMultiSelectComponent, BBMultiSelectModule } from './lib/multi-select/index';
-export { BBCommonModule, BBMenuItem, closeSubscription } from './lib/common/index';
-export { BBDragAndDropContainerComponent, BBDraggableDirective, DraggableContext, BBDragAndDropComponentModule } from './lib/drag-and-drop-component/index';
-export { TabService, BBTabModule } from './lib/tab/index';
-export { DragAndDropService, BBDragAndDropModule } from './lib/drag-and-drop/index';
-export { BBSortableModule } from './lib/sortable/index';
-export { BBStateCssMapperService, BBAnimationStatesService } from './lib/animation-states/index';
+export { AltPanelState1Animation, AltPanelState2Animation, BBAlternatingPanelComponent, BBAlternatingPanelDirective, BBAlternatingPanelModule } from './lib/alternating-panel';
+export { BBCollapsingMenuModule, BBCollapsingMenu } from './lib/collapsing-menu';
+export { BBCommonModule, BBMenuItem, closeSubscription } from './lib/common';
+export { BBContentConductorConstructorToken, BBContentDirective, BBContentContainerDirective, BBDefaultContentConductorModule, BBContentConductorService, BBContentConductorModule } from './lib/content-conductor';
+export { DragAndDropService, BBDragAndDropModule } from './lib/drag-and-drop';
+export { BBDragAndDropContainerComponent, BBDraggableDirective, DraggableContext, BBDragAndDropComponentModule } from './lib/drag-and-drop-component';
+export { BBDropdownInputModule, BBDropdownInputServiceToken, BBDropdownInput } from './lib/dropdown-input';
+export { BBDropdownMenuModule, BBDropdownMenu } from './lib/dropdown-menu';
+export { BBAnimationStatesService, BBDefaultDynamicAnimationsHandlerModule, BBDynamicAnimationsHandlerConstructorToken, BBStateCssMapperService, BBDynamicAnimationsBase, BBDynamicAnimationsModule, BBDynamicAnimationsService } from './lib/dynamic-animations';
+//export * from './lib/dynamic-component';
+export { BBHamburgerMenuModule, BBHamburgerMenu } from './lib/hamburger-menu';
+export { BBMultiSelectComponent, BBMultiSelectModule } from './lib/multi-select';
+//export * from './lib/nav-bar';
+export { BBSlideoutMenuModule, BBSlideoutMenu } from './lib/slideout-menu';
+export { BBSlidingPanelModule, BBSlidingPanel, BBSlidingPanelToggle } from './lib/sliding-panel';
+export { BBSortableModule } from './lib/sortable';
+export { TabService, BBTabModule } from './lib/tab';
 // everything (is this necessary?)
 export { BBRootModule, BearBonesModule } from './lib/bear-bones.module';
 
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljX2FwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0B1YXQvYmVhcmJvbmVzLyIsInNvdXJjZXMiOlsicHVibGljX2FwaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7OztBQUtBLHFKQUFjLCtCQUErQixDQUFDO0FBQzlDLDJFQUFjLDJCQUEyQixDQUFDO0FBQzFDLHFEQUFjLDJCQUEyQixDQUFDO0FBQzFDLHFEQUFjLDJCQUEyQixDQUFDO0FBQzFDLG9GQUFjLDRCQUE0QixDQUFDO0FBQzNDLHVEQUFjLDRCQUE0QixDQUFDO0FBQzNDLHlEQUFjLDZCQUE2QixDQUFDO0FBQzVDLDREQUFjLDBCQUEwQixDQUFDO0FBQ3pDLDhEQUFjLG9CQUFvQixDQUFDO0FBQ25DLHNIQUFjLHFDQUFxQyxDQUFDO0FBQ3BELHdDQUFjLGlCQUFpQixDQUFDO0FBQ2hDLHdEQUFjLDJCQUEyQixDQUFDO0FBQzFDLGlDQUFjLHNCQUFzQixDQUFDO0FBQ3JDLGtFQUFjLDhCQUE4QixDQUFDOztBQUc3Qyw4Q0FBYyx5QkFBeUIsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbIi8qXG4gKiBQdWJsaWMgQVBJIFN1cmZhY2Ugb2YgYmVhci1ib25lc1xuICovXG5cbiAvLyBpbmRpdmlkdWFsIGV4cG9ydHNcbmV4cG9ydCAqIGZyb20gJy4vbGliL2FsdGVybmF0aW5nLXBhbmVsL2luZGV4JztcbmV4cG9ydCAqIGZyb20gJy4vbGliL3NsaWRpbmctcGFuZWwvaW5kZXgnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvZHJvcGRvd24tbWVudS9pbmRleCc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9zbGlkZW91dC1tZW51L2luZGV4JztcbmV4cG9ydCAqIGZyb20gJy4vbGliL2Ryb3Bkb3duLWlucHV0L2luZGV4JztcbmV4cG9ydCAqIGZyb20gJy4vbGliL2hhbWJ1cmdlci1tZW51L2luZGV4JztcbmV4cG9ydCAqIGZyb20gJy4vbGliL2NvbGxhcHNpbmctbWVudS9pbmRleCc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9tdWx0aS1zZWxlY3QvaW5kZXgnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvY29tbW9uL2luZGV4JztcbmV4cG9ydCAqIGZyb20gJy4vbGliL2RyYWctYW5kLWRyb3AtY29tcG9uZW50L2luZGV4JztcbmV4cG9ydCAqIGZyb20gJy4vbGliL3RhYi9pbmRleCc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9kcmFnLWFuZC1kcm9wL2luZGV4JztcbmV4cG9ydCAqIGZyb20gJy4vbGliL3NvcnRhYmxlL2luZGV4JztcbmV4cG9ydCAqIGZyb20gJy4vbGliL2FuaW1hdGlvbi1zdGF0ZXMvaW5kZXgnO1xuXG4vLyBldmVyeXRoaW5nIChpcyB0aGlzIG5lY2Vzc2FyeT8pXG5leHBvcnQgKiBmcm9tICcuL2xpYi9iZWFyLWJvbmVzLm1vZHVsZSc7XG4iXX0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljX2FwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0B1YXQvYmVhcmJvbmVzLyIsInNvdXJjZXMiOlsicHVibGljX2FwaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7OztBQUtBLHFKQUFjLHlCQUF5QixDQUFDO0FBQ3hDLHlEQUFjLHVCQUF1QixDQUFDO0FBQ3RDLDhEQUFjLGNBQWMsQ0FBQztBQUM3QiwwTEFBYyx5QkFBeUIsQ0FBQztBQUN4Qyx3REFBYyxxQkFBcUIsQ0FBQztBQUNwQyxzSEFBYywrQkFBK0IsQ0FBQztBQUM5QyxvRkFBYyxzQkFBc0IsQ0FBQztBQUNyQyxxREFBYyxxQkFBcUIsQ0FBQztBQUNwQyx1T0FBYywwQkFBMEIsQ0FBQzs7QUFFekMsdURBQWMsc0JBQXNCLENBQUM7QUFDckMsNERBQWMsb0JBQW9CLENBQUM7O0FBRW5DLHFEQUFjLHFCQUFxQixDQUFDO0FBQ3BDLDJFQUFjLHFCQUFxQixDQUFDO0FBQ3BDLGlDQUFjLGdCQUFnQixDQUFDO0FBQy9CLHdDQUFjLFdBQVcsQ0FBQzs7QUFHMUIsOENBQWMseUJBQXlCLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyIvKlxuICogUHVibGljIEFQSSBTdXJmYWNlIG9mIGJlYXItYm9uZXNcbiAqL1xuXG4gLy8gaW5kaXZpZHVhbCBleHBvcnRzXG5leHBvcnQgKiBmcm9tICcuL2xpYi9hbHRlcm5hdGluZy1wYW5lbCc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9jb2xsYXBzaW5nLW1lbnUnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvY29tbW9uJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL2NvbnRlbnQtY29uZHVjdG9yJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL2RyYWctYW5kLWRyb3AnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvZHJhZy1hbmQtZHJvcC1jb21wb25lbnQnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvZHJvcGRvd24taW5wdXQnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvZHJvcGRvd24tbWVudSc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9keW5hbWljLWFuaW1hdGlvbnMnO1xuLy9leHBvcnQgKiBmcm9tICcuL2xpYi9keW5hbWljLWNvbXBvbmVudCc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9oYW1idXJnZXItbWVudSc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9tdWx0aS1zZWxlY3QnO1xuLy9leHBvcnQgKiBmcm9tICcuL2xpYi9uYXYtYmFyJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL3NsaWRlb3V0LW1lbnUnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvc2xpZGluZy1wYW5lbCc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9zb3J0YWJsZSc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi90YWInO1xuXG4vLyBldmVyeXRoaW5nIChpcyB0aGlzIG5lY2Vzc2FyeT8pXG5leHBvcnQgKiBmcm9tICcuL2xpYi9iZWFyLWJvbmVzLm1vZHVsZSc7XG4iXX0=

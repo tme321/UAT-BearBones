@@ -10,10 +10,10 @@ import {
   EventEmitter,
   Output} from '@angular/core';
 import { Observable ,  Subscription ,  fromEvent } from 'rxjs';
-import { bbDnDType } from './../dnd.const';
+import { bbDnDType } from '../dnd.const';
 import { closeSubscription } from '../../common';
 import { BBDragAndDropService } from '../drag-and-drop.service';
-import { BBVector, BBDragStartEvent } from './../dnd.models';
+import { BBVector, BBDragStartEvent } from '../dnd.models';
 
 /**
  * BB Draggable Structural Directive

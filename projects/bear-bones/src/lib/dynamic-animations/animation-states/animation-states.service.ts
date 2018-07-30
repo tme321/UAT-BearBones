@@ -1,26 +1,34 @@
-import { Injectable, RendererFactory2 } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AnimationPlayer, AnimationBuilder } from '@angular/animations';
-import { BBAnimationTransitions } from './animation-transitions.model';
-import { BBAnimationPlayers } from './animation-players.model';
-import { BBStateCssMapperService } from './state-css-mapper/state-css-mapper.service';
-import { BBAnimationStateMachine } from './animation-state-machine.model';
-import { BBStateCSSMapper } from './state-css-mapper/state-css-mapper.service';
+import { BBAnimationTransitions } from '../animation-transitions/animation-transitions.model';
+import { BBAnimationPlayers } from '../animation-players/animation-players.model';
+import { BBAnimationStateMachine } from '../animation-state-machine/animation-state-machine.model';
+import { BBStateCSSMapper } from '../state-css-mapper/state-css-mapper.model';
 
 /**
+ * This service creates an animation transition 
+ * state machine with the method 
+ * [createAnimationStateMachine]{@link BBAnimationStatesService#createAnimationStateMachine} 
+ * from a given BBAnimationTransitions object.
+ * 
+ * The returned state machine is in the shape of 
+ * [BBAnimationStateMachine]{@link BBAnimationStateMachine} which consists of 3 
+ * methods:
  * 
  */
 @Injectable()
 export class BBAnimationStatesService {
+
   constructor(
-    private builder: AnimationBuilder,
-    private cssMapper: BBStateCssMapperService,
-    private rendererFactory: RendererFactory2,
-  ) {}
+    private builder: AnimationBuilder) {}
 
   /**
+   * Build a group of [Animation Players]{@link @angular/animations#AnimationPlayer}.
    * 
    * @param element The element to apply the animations to.
    * @param transitions The map of state transition animations for the element.
+   * @returns A data structure representing the transition names and animation
+   * players in the shape of [BBAnimationPlayers]{@link BBAnimationPlayers}
    */
   buildPlayers(
     element: any, 
@@ -41,6 +49,16 @@ export class BBAnimationStatesService {
     },{});
   }
 
+  /**
+   * Create the callback function for an animation to 
+   * execute when the animation starts.  The callback 
+   * will remove the css class defined by the state 
+   * and the [BBStateCSSMapper]{@link BBStateCSSMapper}.
+   * 
+   * @param state The string that represents the state.
+   * @param mapper The [BBStateCSSMapper]{@link BBStateCSSMapper}
+   * that modifies the css of an element.
+   */
   onAnimationStart = (
     state: string, 
     mapper: BBStateCSSMapper = null) => () => {
@@ -49,6 +67,16 @@ export class BBAnimationStatesService {
       }
   }
 
+ /**
+   * Create the callback function for an animation to 
+   * execute when the animation finishes.  The callback 
+   * will add the css class defined by the state 
+   * and the [BBStateCSSMapper]{@link BBStateCSSMapper}.
+   * 
+   * @param state The string that represents the state.
+   * @param mapper The [BBStateCSSMapper]{@link BBStateCSSMapper}
+   * that modifies the css of an element.
+   */
   onAnimationDone = (
     state: string, 
     mapper: BBStateCSSMapper = null) => () => {
@@ -58,10 +86,10 @@ export class BBAnimationStatesService {
   }
 
   /**
-   * 
-   * @param fromState 
-   * @param toState 
-   * @param players 
+   * Get the player for a specific transition.
+   * @param fromState The current state.
+   * @param toState The next state.
+   * @param players The {@link BBAnimationPlayers} to look up the player in.
    */
   getPlayer(
     fromState: string, 
@@ -73,7 +101,8 @@ export class BBAnimationStatesService {
   }
 
   /**
-   * 
+   * Destroy the {@link @angular/animations#AnimationPlayer} objects
+   * inside the {@link BBAnimationPlayers}.
    * @param players 
    */
   destroyAllPlayers(players: BBAnimationPlayers) {
@@ -87,9 +116,11 @@ export class BBAnimationStatesService {
   }
 
   /**
-   * 
-   * @param element 
-   * @param transitions 
+   * Create a {@link BBAnimationStateMachine} to apply to an
+   * element when the state is transitioned.
+   * @param element The element to apply the animations to.
+   * @param transitions The {@link BBAnimationTransitions} map of 
+   * the state transition animations to play.
    */
   createAnimationStateMachine(
     element: any, 

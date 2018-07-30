@@ -1,80 +1,41 @@
-import { Directive, Input, ElementRef, Renderer2 } from '@angular/core';
-import { BBAnimationStatesService } from '../animation-states/animation-states.service';
-import { BBAnimationTransitions } from '../animation-states/animation-transitions.model';
-import { BBAnimationStateMachine } from '../animation-states/animation-state-machine.model';
-import { BBStateCSSMap } from '../animation-states/state-css-mapper/state-css-mapper.model';
-import { BBStateCssMapperService, BBStateCSSMapper } from '../animation-states/state-css-mapper/state-css-mapper.service';
+import { Directive, Input, ElementRef } from '@angular/core';
+import { BBDynamicAnimationsService } from '../dynamic-animations/dynamic-animations.service';
+import { BBAnimationTransitions } from '../dynamic-animations/animation-transitions/animation-transitions.model';
+import { BBDynamicAnimationsHandler } from '../dynamic-animations/dynamic-animations-handler/dynamic-animations-handler.model';
+import { BBStateCSSMap } from '../dynamic-animations/state-css-map/state-css-map.model';
 
 @Directive({
   selector: '[bbAlternatingPanel]'
 })
 export class BBAlternatingPanelDirective {
+  private animationsHandler: BBDynamicAnimationsHandler;
 
-  private animationsStateMachine: BBAnimationStateMachine;
-  private cssMapper: BBStateCSSMapper;
-
-  private stateCache: string;
-  private mapCache: BBStateCSSMap;
-  private transitionsCache: BBAnimationTransitions;
-  /**
-   * Defintes the css classes the panel will use.
-   */
-  @Input() set css (map: BBStateCSSMap) {
-    if(this.mapCache != map) {
-      this.mapCache = map;
-
-      if(this.cssMapper) {
-        this.cssMapper.removeAll();
-        this.cssMapper.destroy();
-      }
-
-      this.cssMapper = this.cssMapperService.createStateCSSMapper(
-        this.elRef.nativeElement,
-        this.mapCache);
-    }
+  @Input() set cssMap (map: BBStateCSSMap) {
+    this.animationsHandler.setCSSMap(map);
   }
 
-  @Input() set state(toState:string) {
-    if(this.stateCache != toState) {
-      this.stateCache = toState;
-
-      if(this.animationsStateMachine) {
-        this.animationsStateMachine.next(this.stateCache, this.cssMapper);
-      }
-    }
+  @Input() set state(toState: string) {
+    this.animationsHandler.nextState(toState);
   }
 
   @Input() set transitions(transitions: BBAnimationTransitions) {
-    if(this.transitionsCache != transitions) {
-      this.transitionsCache = transitions;
-
-      if(this.animationsStateMachine) {
-
-        if(this.cssMapper) {
-          this.cssMapper.removeAll();
-        }
-
-        this.animationsStateMachine.destroy();
-      }    
-
-      this.animationsStateMachine = 
-        this.bbBuilder
-          .createAnimationStateMachine(
-            this.elRef.nativeElement,
-            this.transitionsCache);
-    }
+    this.animationsHandler.setTransitions(transitions);
   }
 
   constructor(
     private elRef: ElementRef,
-    private renderer: Renderer2,
-    private bbBuilder: BBAnimationStatesService,
-    private cssMapperService: BBStateCssMapperService
-  ) { }
+    private daServ: BBDynamicAnimationsService,
+  ) {
+    this.animationsHandler = this.daServ
+      .createAnimationsHandler(this.elRef.nativeElement);
+  }
 
   ngOnInit() {  
-    if(this.animationsStateMachine) {
-      this.animationsStateMachine.init(this.stateCache,this.cssMapper);
-    }
+    this.animationsHandler.init();
   }
+
+  ngOnDestroy() {
+    this.animationsHandler.destroy();
+  }
+  
 }

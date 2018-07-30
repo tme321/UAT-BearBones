@@ -15,7 +15,7 @@ import {
 import { BBDraggableDirective } from '../draggable/draggable.directive';
 import { Observable ,  Subscription ,  fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { bbDnDType } from './../dnd.const';
+import { bbDnDType } from '../dnd.const';
 import { BBDragAndDropService } from '../drag-and-drop.service';
 import { BBDragStartEvent, BBVector } from '../dnd.models';
 

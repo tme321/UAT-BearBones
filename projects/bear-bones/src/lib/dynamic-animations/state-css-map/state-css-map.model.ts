@@ -8,13 +8,13 @@
  * 
  * The new class will be applied after
  * any transition animations complete.
+ * 
+ * @example
+ * {
+ *   'open': 'is-open',
+ *   'closed': 'is-closed',
+ * }
  */
 export interface BBStateCSSMap {
     [state:string]: string;
 }
-
-let m: BBStateCSSMap = {
-    'a':'b',
-    's':'c',
-}
-
