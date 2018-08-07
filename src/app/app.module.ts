@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ComponentFactoryResolver } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,7 +16,7 @@ import { FooComponent } from './home/foo.component';
 import { DemoDropdownInputService } from './demo-dropdown-service/demo-dropdown-input.service';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 
-import { BBCollapsingMenuModule, BBCommonModule, BBDragAndDropModule, BBDropdownInputModule, BBDropdownMenuModule, BBHamburgerMenuModule, BBMultiSelectModule, BBSlideoutMenuModule, BBSlidingPanelModule, BBDropdownInputServiceToken, BBAlternatingPanelModule, BBContentConductorModule, BBDynamicAnimationsModule } from 'BearBones';
+import { BBCollapsingMenuModule, BBCommonModule, BBDragAndDropModule, BBDropdownInputModule, BBDropdownMenuModule, BBHamburgerMenuModule, BBMultiSelectModule, BBSlideoutMenuModule, BBSlidingPanelModule, BBDropdownInputServiceToken, BBAlternatingPanelModule, BBContentConductorModule, BBDynamicAnimationsModule, BBDynamicComponentModule } from 'BearBones';
 
 const BBModules = [  
   BBCollapsingMenuModule.forRoot(), 
@@ -31,6 +31,7 @@ const BBModules = [
   BBContentConductorModule.forRoot(), 
   BBAlternatingPanelModule.forRoot(), 
   BBDynamicAnimationsModule.forRoot(),
+  BBDynamicComponentModule.forRoot()
 ];
 
 function dddisFactory() { 

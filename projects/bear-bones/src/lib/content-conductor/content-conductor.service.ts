@@ -27,13 +27,13 @@ export class BBContentConductorService {
  
   constructor(
     @Inject(BBContentConductorConstructorToken) 
-    private constructor: BBContentConductorConstructor) { }
+    private conductorConstructor: BBContentConductorConstructor) { }
 
   createContentConductor<T extends BBContentContainer>(
     containersQueryList: QueryList<T>,
     contentsQueryList : QueryList<TemplateRef<any>>) {
     
-    return  new this.constructor(
+    return  new this.conductorConstructor(
       containersQueryList,
       contentsQueryList
     );

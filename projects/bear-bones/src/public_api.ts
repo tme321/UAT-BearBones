@@ -12,7 +12,7 @@ export * from './lib/drag-and-drop-component';
 export * from './lib/dropdown-input';
 export * from './lib/dropdown-menu';
 export * from './lib/dynamic-animations';
-//export * from './lib/dynamic-component';
+export * from './lib/dynamic-component';
 export * from './lib/hamburger-menu';
 export * from './lib/multi-select';
 //export * from './lib/nav-bar';

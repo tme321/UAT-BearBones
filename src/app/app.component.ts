@@ -42,7 +42,7 @@ export class AppComponent {
     else if(this.stateC === 'open') { this.stateC = 'closed'; }
   }
 
-  model: BBDynamicComponentModel;
+  model: BBDynamicComponentModel<any>;
 
 }
 

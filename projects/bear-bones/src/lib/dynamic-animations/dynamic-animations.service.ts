@@ -70,7 +70,7 @@ export class BBDynamicAnimationsService {
 
   constructor(
     @Inject(BBDynamicAnimationsHandlerConstructorToken) 
-    private constructor: BBDynamicAnimationsHandlerConstructor,
+    private animationsHandlerConstructor: BBDynamicAnimationsHandlerConstructor,
     private cssMapperService: BBStateCssMapperService,
     private animationStatesBuilder: BBAnimationStatesService,
   ) { }
@@ -86,7 +86,7 @@ export class BBDynamicAnimationsService {
    * handler to. 
    */
   createAnimationsHandler(element: any) {
-    return new this.constructor(
+    return new this.animationsHandlerConstructor(
       element,
       this.cssMapperService,
       this.animationStatesBuilder);
