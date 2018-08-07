@@ -1,8 +1,0 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-export { BBCollapsingMenu } from './collapsing-menu.component';
-export { BBCollapsingMenuModule } from './collapsing-menu.module';
-
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9AdWF0L2JlYXJib25lcy8iLCJzb3VyY2VzIjpbImxpYi9jb2xsYXBzaW5nLW1lbnUvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLGlDQUFjLDZCQUE2QixDQUFDO0FBQzVDLE9BQU8sRUFBQyxzQkFBc0IsRUFBQyxNQUFNLDBCQUEwQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0ICogZnJvbSAnLi9jb2xsYXBzaW5nLW1lbnUuY29tcG9uZW50JztcclxuZXhwb3J0IHtCQkNvbGxhcHNpbmdNZW51TW9kdWxlfSBmcm9tICcuL2NvbGxhcHNpbmctbWVudS5tb2R1bGUnO1xyXG4iXX0=

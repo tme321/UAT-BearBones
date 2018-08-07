@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { upSlide, downSlide } from './temp.anim';
 
+import { BBDynamicComponentModel } from 'BearBones';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -39,6 +41,8 @@ export class AppComponent {
     if(this.stateC === 'closed') { this.stateC = 'open'; }
     else if(this.stateC === 'open') { this.stateC = 'closed'; }
   }
+
+  model: BBDynamicComponentModel;
 
 }
 

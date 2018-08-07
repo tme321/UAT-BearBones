@@ -16,7 +16,7 @@ import { FooComponent } from './home/foo.component';
 import { DemoDropdownInputService } from './demo-dropdown-service/demo-dropdown-input.service';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 
-import { BBCollapsingMenuModule, BBCommonModule, BBDragAndDropModule, BBDropdownInputModule, BBDropdownMenuModule, BBHamburgerMenuModule, BBMultiSelectModule, BBSlideoutMenuModule, BBSlidingPanelModule, BBDropdownInputServiceToken, BBAlternatingPanelModule, BBContentConductorModule, BBDefaultContentConductorModule, BBDynamicAnimationsModule, BBDefaultDynamicAnimationsHandlerModule } from 'BearBones';
+import { BBCollapsingMenuModule, BBCommonModule, BBDragAndDropModule, BBDropdownInputModule, BBDropdownMenuModule, BBHamburgerMenuModule, BBMultiSelectModule, BBSlideoutMenuModule, BBSlidingPanelModule, BBDropdownInputServiceToken, BBAlternatingPanelModule, BBContentConductorModule, BBDynamicAnimationsModule } from 'BearBones';
 
 const BBModules = [  
   BBCollapsingMenuModule.forRoot(), 
@@ -30,9 +30,7 @@ const BBModules = [
   BBSlidingPanelModule.forRoot(),
   BBContentConductorModule.forRoot(), 
   BBAlternatingPanelModule.forRoot(), 
-  BBDefaultContentConductorModule.forRoot(),
   BBDynamicAnimationsModule.forRoot(),
-  BBDefaultDynamicAnimationsHandlerModule.forRoot(),
 ];
 
 function dddisFactory() { 

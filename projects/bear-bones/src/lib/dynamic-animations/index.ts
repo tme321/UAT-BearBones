@@ -2,7 +2,6 @@ export * from './animation-players/animation-players.model';
 export * from './animation-state-machine/animation-state-machine.model';
 export * from './animation-states/animation-states.service';
 export * from './animation-transitions/animation-transitions.model';
-export * from './default-dynamic-animations-handler/default-dynamic-animations-handler.module';
 export * from './dynamic-animations-handler/dynamic-animations-handler.constructor';
 export * from './dynamic-animations-handler/dynamic-animations-handler.model';
 export * from './dynamic-animations-handler/dynamic-animations-handler.token';

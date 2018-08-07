@@ -1,12 +1,9 @@
 import {
     Directive,  
-    Component,
     ComponentFactoryResolver,
     ComponentRef,
-    ChangeDetectionStrategy,
     Input,
     ReflectiveInjector,
-    ViewChild,
     ViewContainerRef } from '@angular/core';
 import { DynamicComponentData } from './dynamic-component-data.interface';
 
@@ -17,11 +14,11 @@ import { DynamicComponentData } from './dynamic-component-data.interface';
   exportAs:'dynamicComp',
 })
 export class BBDynamicComponentDirective {
-    public currentCompRef: ComponentRef<any>;
+    currentCompRef: ComponentRef<any>;
 
-    public dccClasses: any = {};
+    dccClasses: any = {};
 
-    @Input('bb-dynamic-component') public set componentData(compData: DynamicComponentData) {
+    @Input('bb-dynamic-component') set componentData(compData: DynamicComponentData) {
       this.createComponent(compData);
     }
 

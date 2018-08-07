@@ -3,8 +3,8 @@ import { BBAnimationStatesService } from '../animation-states/animation-states.s
 import { BBStateCssMapperService } from '../state-css-mapper/state-css-mapper.service';
 
 export interface BBDynamicAnimationsHandlerConstructor {
-    new<T extends BBDynamicAnimationsHandler>( 
+    new( 
         element: any,
         cssMapperService: BBStateCssMapperService,
-        animationStatesBuilder: BBAnimationStatesService):T;
+        animationStatesBuilder: BBAnimationStatesService):BBDynamicAnimationsHandler;
 }
