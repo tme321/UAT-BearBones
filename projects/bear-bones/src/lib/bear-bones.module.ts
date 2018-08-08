@@ -1,3 +1,5 @@
+/*
+
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { BBSlidingPanelModule } from './sliding-panel';
@@ -34,7 +36,7 @@ const BB_MODULES = [
  * should not be used by consumers of the 
  * library and is not exported as part of 
  * the distrbuted package.
- */
+ * /
 @NgModule({
   imports: [
     BBSlidingPanelModule.forRoot(),
@@ -48,7 +50,7 @@ const BB_MODULES = [
     BBDragAndDropComponentModule.forRoot(),
     BBTabModule.forRoot(),
     BBDragAndDropModule.forRoot(),
-    BBSortableModule.forRoot(),
+    BBSortableModule.forRoot()
     
   ],
   exports: BB_MODULES
@@ -64,3 +66,5 @@ export class BearBonesModule {
     return {ngModule: BBRootModule, providers: []};
   }
 }
+
+*/

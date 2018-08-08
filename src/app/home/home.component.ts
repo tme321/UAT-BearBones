@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NavigationLink } from '../menu-items/menu-items.components';
-import { DropdownInputItemChosenEvent } from 'BearBones/uat-bearbones';
+import { DropdownInputItemChosenEvent } from '@uat/bear-bones';
 
 @Component({
   selector: 'app-home',

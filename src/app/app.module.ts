@@ -16,8 +16,9 @@ import { FooComponent } from './home/foo.component';
 import { DemoDropdownInputService } from './demo-dropdown-service/demo-dropdown-input.service';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 
-import { BBCollapsingMenuModule, BBCommonModule, BBDragAndDropModule, BBDropdownInputModule, BBDropdownMenuModule, BBHamburgerMenuModule, BBMultiSelectModule, BBSlideoutMenuModule, BBSlidingPanelModule, BBDropdownInputServiceToken, BBAlternatingPanelModule, BBContentConductorModule, BBDynamicAnimationsModule, BBDynamicComponentModule } from 'BearBones';
+import { BBCollapsingMenuModule, BBCommonModule, BBDragAndDropModule, BBDropdownInputModule, BBDropdownMenuModule, BBHamburgerMenuModule, BBMultiSelectModule, BBSlideoutMenuModule, BBSlidingPanelModule, BBDropdownInputServiceToken, BBAlternatingPanelModule, BBContentConductorModule, BBDynamicAnimationsModule, BBDynamicComponentModule } from '@uat/bear-bones';
 
+/*
 const BBModules = [  
   BBCollapsingMenuModule.forRoot(), 
   BBCommonModule.forRoot(), 
@@ -33,10 +34,13 @@ const BBModules = [
   BBDynamicAnimationsModule.forRoot(),
   BBDynamicComponentModule.forRoot()
 ];
+*/
 
+/*
 function dddisFactory() { 
   return new DemoDropdownInputService();
 }
+*/
 
 @NgModule({
   declarations: [
@@ -59,8 +63,23 @@ function dddisFactory() {
 	  ReactiveFormsModule,
     HttpModule,
 	  RouterModule,
-	  AppRoutingModule,
-    ...BBModules,
+    AppRoutingModule,
+
+
+    
+    BBCollapsingMenuModule, 
+    BBCommonModule, 
+    BBDragAndDropModule.forRoot(), 
+    BBDropdownInputModule.forRoot(), 
+    BBDropdownMenuModule.forRoot(), 
+    BBHamburgerMenuModule.forRoot(), 
+    BBMultiSelectModule.forRoot(), 
+    BBSlideoutMenuModule.forRoot(), 
+    BBSlidingPanelModule.forRoot(),
+    BBContentConductorModule.forRoot(), 
+    BBAlternatingPanelModule.forRoot(), 
+    BBDynamicAnimationsModule.forRoot(),
+    BBDynamicComponentModule.forRoot()
   ],
   providers: [
     { provide: BBDropdownInputServiceToken, useClass: DemoDropdownInputService},

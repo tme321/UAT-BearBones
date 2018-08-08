@@ -14,10 +14,12 @@ import { BBMenuItem } from './menu-item.directive';
   ]
 })
 export class BBCommonModule {
+  /*
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: BBCommonModule,
       providers: []
     };
   }
+  */
  }

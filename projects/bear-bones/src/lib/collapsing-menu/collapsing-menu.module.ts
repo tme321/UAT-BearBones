@@ -14,10 +14,12 @@ import { BBSlidingPanelModule } from '../sliding-panel/sliding-panel.module';
   exports: [BBCollapsingMenu]
 })
 export class BBCollapsingMenuModule {
+  /*
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: BBCollapsingMenuModule,
       providers: []
     };
   }
+  */
  }

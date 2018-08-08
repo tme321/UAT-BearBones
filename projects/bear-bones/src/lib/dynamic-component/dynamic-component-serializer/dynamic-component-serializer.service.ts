@@ -1,6 +1,5 @@
 import { Injectable, EventEmitter, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BBDynamicComponentSerializer } from './dynamic-component-serializer.model';
 import { BBComponentConstructor } from '../component-constructor/component-constructor.model';
 import { BBDynamicComponentModel } from '../dynamic-component-model/dynamic-component-model.model';
 import { BBDynamicComponentsMap } from '../dynamic-component-map/dynamic-component-map.model';
@@ -13,7 +12,7 @@ export class BBDynamicComponentSerializerService {
 
   constructor(
     @Inject(BBDynamicComponentSerializerConstructorToken)
-    private constructor: BBDynamicComponentSerializerConstructor
+    private serializerConstructor: BBDynamicComponentSerializerConstructor
   ) { }
 
   createSerializer(map: BBDynamicComponentsMap) {
@@ -27,10 +26,11 @@ export class BBDynamicComponentSerializerService {
       serializerMap.deserializeMap.set(name, map[name]);
     });
 
-    return new this.constructor(serializerMap);
+    return new this.serializerConstructor(serializerMap);
   }
 }
 
+/*
 
 export class Foo {
   bar: string;
@@ -55,3 +55,5 @@ let o:BBDynamicComponentModel<Foo> = {
     buzz: (e: number)=>{},
   }
 }
+
+*/

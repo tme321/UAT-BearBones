@@ -137,7 +137,9 @@ export class BBDynamicComponentDirective2<T> implements OnDestroy {
                 Object.keys(callbacks)
                     .map(cb=>{
                         return (this.compRef.instance[cb] as EventEmitter<any>)
-                            .subscribe(callbacks[cb]);
+                            .subscribe(event=>{
+                                callbacks[cb](event);
+                            });
                     });
         }
     }

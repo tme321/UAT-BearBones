@@ -2,14 +2,10 @@
     Component, 
     Input, 
     ChangeDetectionStrategy, 
-    ViewChild, 
     EventEmitter, 
     Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { 
-    NavigationLinkModel, 
-    MenuLabelModel, 
-    MenuButtonModel } from './menu-items.interfaces';
+import { NavigationLinkModel } from './menu-items.interfaces';
 
 @Component({
     template: `
@@ -17,7 +13,8 @@ import {
                    [routerLink]="[model.value]"
                    routerLinkActive="selected"
                    [queryParams]="model.queryParameters"
-                   [preserveQueryParams]="model.preserveQParams">
+                   [preserveQueryParams]="model.preserveQParams"
+                   (click)="onClick.emit($event)">
                     {{model.text}}
                 </a>
     `,
@@ -25,6 +22,8 @@ import {
 })
 export class NavigationLink {
     @Input() model: NavigationLinkModel;
+
+    @Output() onClick = new EventEmitter<MouseEvent>();//: (e: MouseEvent) => any;
 
     constructor(private router: Router) {
     }

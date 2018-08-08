@@ -1,5 +1,4 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { BBDynamicAnimationsService } from './dynamic-animations.service';
 import { BBStateCssMapperService } from './state-css-mapper/state-css-mapper.service';
 import { BBAnimationStatesService } from './animation-states/animation-states.service';
@@ -8,10 +7,11 @@ import { BBDefaultDynamicAnimationsHandlerService } from './default-dynamic-anim
 import { BBDynamicAnimationsHandlerConstructorToken } from './dynamic-animations-handler/dynamic-animations-handler.token';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  declarations: []
+  providers: [
+    BBDynamicAnimationsService,
+    BBAnimationStatesService, 
+    BBStateCssMapperService
+  ]
 })
 export class BBDynamicAnimationsModule {
   static forRoot(
@@ -20,9 +20,6 @@ export class BBDynamicAnimationsModule {
     return {
       ngModule: BBDynamicAnimationsModule,
       providers: [
-        BBDynamicAnimationsService,
-        BBAnimationStatesService, 
-        BBStateCssMapperService,
         { 
           provide: BBDynamicAnimationsHandlerConstructorToken, 
           useValue: animationsHandlerConstructor 

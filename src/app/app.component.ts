@@ -1,7 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { upSlide, downSlide } from './temp.anim';
 
-import { BBDynamicComponentModel } from 'BearBones';
+import { BBDynamicComponentSerializer, BBDynamicComponentModel, BBDynamicComponentSerializerService } from '@uat/bear-bones';
+import { NavigationLink } from './menu-items/menu-items.components';
+import { NavigationLinkModel } from './menu-items/menu-items.interfaces';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +14,19 @@ import { BBDynamicComponentModel } from 'BearBones';
 export class AppComponent {
   title = '@UAT/BearBones';
 
-  constructor() {
+  readonly navLinkName =  'nav-link';
+  serializer: BBDynamicComponentSerializer;
+
+  model$ = new Subject<NavigationLinkModel>();
+
+
+  constructor(private dsService: BBDynamicComponentSerializerService) {
   }
 
   ngOnInit() {
+    this.serializer = this.dsService.createSerializer({
+      [this.navLinkName] : NavigationLink
+    })
   }
 
   trans = {
@@ -42,8 +54,36 @@ export class AppComponent {
     else if(this.stateC === 'open') { this.stateC = 'closed'; }
   }
 
-  model: BBDynamicComponentModel<any>;
+  clickCounter = 0;
+  onNavClick = (e: MouseEvent) => {
+    console.log('Nav was clicked');
+    this.clickCounter++;
+    this.model$.next({
+      text: `Dynamic Link clicked ${this.clickCounter} times`,
+      value: '/',
+      queryParameters: {}
+    });
+  }
 
+  model: BBDynamicComponentModel<NavigationLink> = {
+    name: this.navLinkName,
+    initialValues:{ 
+      model: {
+        text: 'Dynamic Link',
+        value: '/',
+        queryParameters: {},
+      },
+    },
+    outputCallbacks: {
+      onClick: this.onNavClick
+    },
+    inputs$: {
+      model: this.model$.asObservable()
+    }
+
+
+  };
+  
 }
 
 

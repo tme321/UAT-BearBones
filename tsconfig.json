@@ -17,10 +17,10 @@
       "dom"
     ],
     "paths": {
-      "BearBones": [
+      "@uat/bear-bones": [
         "dist/bear-bones"
       ],
-      "BearBones/*": [
+      "@uat/bear-bones/*": [
         "dist/bear-bones/*"
       ]
     }
