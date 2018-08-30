@@ -1,6 +1,4 @@
 import { Component, ElementRef } from '@angular/core';
-import { BBDynamicAnimationsBase } from '../dynamic-animations/dynamic-animations.base';
-import { BBDynamicAnimationsService } from '../dynamic-animations/dynamic-animations.service';
 
 /**
  * 
@@ -12,11 +10,10 @@ import { BBDynamicAnimationsService } from '../dynamic-animations/dynamic-animat
   animations: [],
   exportAs: 'bbAltPanel',
 })
-export class BBAlternatingPanelComponent extends BBDynamicAnimationsBase {
+export class BBAlternatingPanelComponent  {
   constructor(
     protected elRef: ElementRef,
-    protected daServ: BBDynamicAnimationsService,
   ) {
-    super(elRef.nativeElement, daServ);
+    //super(elRef.nativeElement, daServ);
   }
 }

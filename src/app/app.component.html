@@ -1,85 +1,10 @@
-<div class="main-content">
-	<h1>
-	{{title}}
-	</h1>	
-
-	<div bb-hamburger-menu
-		#hmmenu="bbHamburgerMenu"
-		expandOnQuery="(min-width : 844px)">
-		<div bb-fixed-content>
-			<a class="my-brand" [routerLink]="['/']">Home</a>
-		</div>
-		<a bb-menu-item class="nav-link" [routerLink]="['/collapsing']">Collapsing Menu</a>
-		<a bb-menu-item class="nav-link" [routerLink]="['/dropdown']">Dropdown Menu</a>
-		<a bb-menu-item class="nav-link" [routerLink]="['/draganddrop']">Drag And Drop</a>
-
-		<div bb-menu-item class="inner-menu">
-			<div bb-dropdown-menu 
-				 *ngIf="hmmenu.expanded">
-				<a bb-menu-toggle>Menu</a>
-				<a bb-menu-item class="nav-link">Item A</a>
-				<a bb-menu-item class="nav-link">Item B</a>
-				<a bb-menu-item class="nav-link">Item C</a>
-			</div>
-			<div bb-slideout-menu 
-				 *ngIf="!hmmenu.expanded">
-				<a bb-menu-toggle>Menu</a>
-				<a bb-menu-item class="nav-link">Item A</a>
-				<a bb-menu-item class="nav-link">Item B</a>
-				<a bb-menu-item class="nav-link">Item C</a>
-			</div>
-		</div>
-
-		<a bb-menu-item-right class="nav-link">Item D</a>
-		<a bb-menu-item-right class="nav-link">Item E</a>
-		<div bb-menu-toggle>
-			<span *ngIf="!hmmenu.isOpen" class="material-icons">expand_more</span>
-			<span *ngIf="hmmenu.isOpen" class="material-icons">expand_less</span>
-		</div>
-	</div>
-	<!--
-	<div bb-slideout-menu slideDirection="right">
-		<a bb-menu-toggle>Menu</a>
-		<a bb-menu-item class="nav-link">Item A</a>
-		<a bb-menu-item class="nav-link">Item B</a>
-		<a bb-menu-item class="nav-link">Item C</a>
-	</div>
-	-->
-
-	<router-outlet></router-outlet>
-</div>
-
-<button (click)="cToggle()">Toggle</button>
-<div bb-alt-panel
-	class="alt-panel"
-	[transitions]="trans" 
-	[state]="stateC"
-	[cssMap]="{ 'open': 'bb-open', 'closed' : 'bb-closed'}">
-</div>
-
-
-<button (click)="otherToggle()">Toggle</button>
-<div class="alt-panel" bbAlternatingPanel 
-	[transitions]="trans" 
-	[state]="state"
-	[cssMap]="{ 'open': 'bb-open', 'closed' : 'bb-closed'}"
-	>
-</div>
-
-<button (click)="otherToggle2()">Toggle</button>
-<div class="alt-panel" bbAlternatingPanel 
-	[transitions]="trans" 
-	[state]="state2"
-	[cssMap]="{ 'open': 'bb-open', 'closed' : 'bb-closed'}"
-	>
-</div>
-
-
-
-<h3>Dynamic Component</h3>
-<div>
-	<ng-container 
-		[bb-dynamic-component-2]="model"
-		[serializer]="serializer">
-	</ng-container>
+<nav bb-nav-bar
+	class="nav-bar"
+	[panelAnimations]="navBarAnimations">
+	<a *dvk-content class="nav-link" routerLink="/collapsing">Collapsing Menu</a>
+	<a *dvk-content class="nav-link" routerLink="/dropdown">Dropdown Menu</a>
+	<a *dvk-content class="nav-link" routerLink="/draganddrop">Drag And Drop</a>
+</nav>
+<div class="content">
+<router-outlet></router-outlet>
 </div>

@@ -1,3 +1,30 @@
-<p>
-  nav-bar works!
-</p>
+<div class="bb-nav-bar" 
+  [bb-mq]="expandOnQuery" 
+  [event$]="windowResize$">
+
+  <div class="static" #static>
+    <ng-container dvk-content-container="static"></ng-container>
+  </div>
+  <div class="left" #fixedLeft>
+    <ng-container dvk-content-container="fixed-left"></ng-container>
+  </div>
+  <div class="right" #fixedRight>
+    <ng-container dvk-content-container="fixed-right"></ng-container>
+  </div>
+  <a *ngIf="!isMatch" 
+    class="toggle"
+    (click)="onToggle()">Toggle</a>
+</div>
+
+<div #panel
+  class="panel" 
+  dvk-da
+  [state]="panelState"
+  [animations]="panelAnimations">
+  <div class="top" #panelLeft>
+    <ng-container dvk-content-container="panel-top"></ng-container>
+  </div>
+  <div class="bottom" #panelRight>
+    <ng-container dvk-content-container="panel-bottom"></ng-container>
+  </div>
+</div>

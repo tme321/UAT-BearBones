@@ -1,0 +1,17 @@
+.nav-bar {
+    background-color: #444444;
+    position: absolute;
+    left:0;
+    top:0;
+    right:0;
+    max-height: 50px;
+    min-height: 50px;
+}
+
+.nav-link {
+    color: white;
+}
+
+.content {
+    padding:50px;
+}

@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NavigationLink } from '../menu-items/menu-items.components';
-import { DropdownInputItemChosenEvent } from '@uat/bear-bones';
+//import { DropdownInputItemChosenEvent } from '@uat/bear-bones';
 
 @Component({
   selector: 'app-home',
@@ -14,10 +14,12 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
    
   }
-
+  
+  /*
   onSearchItemChosen(e: DropdownInputItemChosenEvent) {
     (e.component as NavigationLink).navigate();
   }
+  */
 
   onItemSelected(item: any){ console.log(item); }
   onItemUnselected(item: any){ console.log(item); }

@@ -16,7 +16,9 @@ import { FooComponent } from './home/foo.component';
 import { DemoDropdownInputService } from './demo-dropdown-service/demo-dropdown-input.service';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 
-import { BBCollapsingMenuModule, BBCommonModule, BBDragAndDropModule, BBDropdownInputModule, BBDropdownMenuModule, BBHamburgerMenuModule, BBMultiSelectModule, BBSlideoutMenuModule, BBSlidingPanelModule, BBDropdownInputServiceToken, BBAlternatingPanelModule, BBContentConductorModule, BBDynamicAnimationsModule, BBDynamicComponentModule } from '@uat/bear-bones';
+import { BBCollapsingMenuModule, BBCommonModule, BBDragAndDropModule,  BBDropdownMenuModule, BBHamburgerMenuModule, BBMultiSelectModule, BBSlideoutMenuModule, BBSlidingPanelModule,  BBAlternatingPanelModule, BBContentConductorModule, BBNavBarModule } from '@uat/bear-bones';
+//BBDropdownInputModule,  BBDynamicAnimationsModule, BBDynamicComponentModule, BBDropdownInputServiceToken,
+import { DynamicAnimationsModule, ContentConductorModule } from '@uat/dvk';
 
 /*
 const BBModules = [  
@@ -70,7 +72,7 @@ function dddisFactory() {
     BBCollapsingMenuModule, 
     BBCommonModule, 
     BBDragAndDropModule.forRoot(), 
-    BBDropdownInputModule.forRoot(), 
+    //BBDropdownInputModule.forRoot(), 
     BBDropdownMenuModule.forRoot(), 
     BBHamburgerMenuModule.forRoot(), 
     BBMultiSelectModule.forRoot(), 
@@ -78,11 +80,16 @@ function dddisFactory() {
     BBSlidingPanelModule.forRoot(),
     BBContentConductorModule.forRoot(), 
     BBAlternatingPanelModule.forRoot(), 
-    BBDynamicAnimationsModule.forRoot(),
-    BBDynamicComponentModule.forRoot()
+    //BBDynamicAnimationsModule.forRoot(),
+    //BBDynamicComponentModule.forRoot(),
+
+    BBNavBarModule,
+
+    DynamicAnimationsModule.forRoot(),
+    ContentConductorModule.forRoot()
   ],
   providers: [
-    { provide: BBDropdownInputServiceToken, useClass: DemoDropdownInputService},
+    //{ provide: BBDropdownInputServiceToken, useClass: DemoDropdownInputService},
   ],
   entryComponents: [
     NavigationLink,

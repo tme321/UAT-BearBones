@@ -16,3 +16,8 @@ div.bb-open {
 div.bb-closed {
     /* height: 0px; */
 }
+
+
+.panel {
+    background-color: #444444;
+} 

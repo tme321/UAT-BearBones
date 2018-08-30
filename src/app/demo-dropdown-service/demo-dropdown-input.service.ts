@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable ,  BehaviorSubject } from 'rxjs';
-import { DropdownInputService, DropdownItemComponentData } from '@uat/bear-bones';
+//import { DropdownInputService, DropdownItemComponentData } from '@uat/bear-bones';
 import { NavigationLink } from '../menu-items/menu-items.components';
 
 /**
@@ -9,19 +9,20 @@ import { NavigationLink } from '../menu-items/menu-items.components';
  * provided with.
  */
 @Injectable()
-export class DemoDropdownInputService implements DropdownInputService {
+export class DemoDropdownInputService /* implements DropdownInputService */ {
 	/**
 	 * This observable will be listened to by the search
 	 * service in order to fill its drop down results box.
 	 */
+	/*
 	public items$: Observable<DropdownItemComponentData[]>;
 
     private itemsSub = new BehaviorSubject<DropdownItemComponentData[]>(null);
 
 	private search_text: string;
-	
+	*/	
     constructor() {
-        this.items$ = this.itemsSub.asObservable();
+      //  this.items$ = this.itemsSub.asObservable();
     }
 
 	/**
@@ -29,6 +30,7 @@ export class DemoDropdownInputService implements DropdownInputService {
 	 * It is up to the service to decide if/when to get a 
 	 * new results set.
 	 */
+	/*
     public setSearchText(text: string) {
         this.search_text = text;
 
@@ -41,7 +43,7 @@ export class DemoDropdownInputService implements DropdownInputService {
             this.clearItems();
         }
     }
-
+	*/
 	/**
 	 * Max results is provided as a function with no return.
 	 * It is expected for the service to implement a way to 
@@ -57,7 +59,7 @@ export class DemoDropdownInputService implements DropdownInputService {
 	 * perform any clean up necessary.
 	 */
     public clearItems() {
-        this.itemsSub.next([]);
+      //  this.itemsSub.next([]);
     }
 
 	/**
@@ -65,6 +67,7 @@ export class DemoDropdownInputService implements DropdownInputService {
 	 * written to asynchronously emit the next results set.
 	 */
     private fetchData() {
+		/*
 		setTimeout(()=>{
 			this.itemsSub.next(
 				[
@@ -120,6 +123,7 @@ export class DemoDropdownInputService implements DropdownInputService {
 				]
 			);
 		},500);
+		*/
     }
 	
 }

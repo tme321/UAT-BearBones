@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { upSlide, downSlide } from './temp.anim';
 
-import { BBDynamicComponentSerializer, BBDynamicComponentModel, BBDynamicComponentSerializerService } from '@uat/bear-bones';
+//import { BBDynamicComponentSerializer, BBDynamicComponentModel, BBDynamicComponentSerializerService } from '@uat/bear-bones';
 import { NavigationLink } from './menu-items/menu-items.components';
 import { NavigationLinkModel } from './menu-items/menu-items.interfaces';
 import { Subject } from 'rxjs';
+import { transition, animate, state, style } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
@@ -15,18 +16,21 @@ export class AppComponent {
   title = '@UAT/BearBones';
 
   readonly navLinkName =  'nav-link';
-  serializer: BBDynamicComponentSerializer;
+  //serializer: BBDynamicComponentSerializer;
 
   model$ = new Subject<NavigationLinkModel>();
 
 
-  constructor(private dsService: BBDynamicComponentSerializerService) {
+  constructor() {
+    //private dsService: BBDynamicComponentSerializerService
   }
 
   ngOnInit() {
+    /*
     this.serializer = this.dsService.createSerializer({
       [this.navLinkName] : NavigationLink
     })
+    */
   }
 
   trans = {
@@ -64,7 +68,7 @@ export class AppComponent {
       queryParameters: {}
     });
   }
-
+/*
   model: BBDynamicComponentModel<NavigationLink> = {
     name: this.navLinkName,
     initialValues:{ 
@@ -83,7 +87,23 @@ export class AppComponent {
 
 
   };
-  
+  */
+
+  navBarAnimations = [
+    transition('open<=>closed',animate('150ms')),
+    state('open',style({
+      'transform-origin': 'top',
+      'transform': 'scaleY(1.0)'
+    })),
+    state('closed',style({
+      'transform-origin': 'top',
+      'transform': 'scaleY(0.0)'
+    })),
+    state('void',style({
+      'transform-origin': 'top',
+      'transform': 'scaleY(0.0)'
+    }))
+  ];
 }
 
 

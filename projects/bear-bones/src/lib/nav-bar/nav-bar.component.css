@@ -1,0 +1,37 @@
+div.bb-nav-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+}
+
+.static, .left, .right {
+    display: flex;
+    flex-direction: row;
+}
+
+.right {
+    justify-content: right;
+}
+
+.panel, .top, .bottom {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel {
+    position: absolute;
+    top:100%;
+    left:0;
+    right:0;
+}
+
+.toggle {
+    position: absolute;
+    right:0;
+}
