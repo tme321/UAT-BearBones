@@ -1,6 +1,6 @@
 <div class="bb-nav-bar" 
   [bb-mq]="expandOnQuery" 
-  [event$]="windowResize$">
+  [event$]="expandEvent$">
 
   <div class="static" #static>
     <ng-container dvk-content-container="static"></ng-container>
@@ -11,15 +11,15 @@
   <div class="right" #fixedRight>
     <ng-container dvk-content-container="fixed-right"></ng-container>
   </div>
-  <a *ngIf="!isMatch" 
+  <a *ngIf="!(isExpanded$ | async)" 
     class="toggle"
-    (click)="onToggle()">Toggle</a>
+    (click)="toggle$.next()"><ng-content select="[bb-toggle]"></ng-content></a>
 </div>
 
 <div #panel
   class="panel" 
   dvk-da
-  [state]="panelState"
+  [state]="panelState$ | async"
   [animations]="panelAnimations">
   <div class="top" #panelLeft>
     <ng-container dvk-content-container="panel-top"></ng-container>

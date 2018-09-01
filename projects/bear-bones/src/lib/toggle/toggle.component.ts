@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 
 @Component({
-  selector: '[bb-toggle]',
+  selector: '[bb-toggle-c]',
   templateUrl: './toggle.component.html',
   styleUrls: ['./toggle.component.css'],
   host: {

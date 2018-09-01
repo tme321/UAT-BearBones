@@ -9,4 +9,4 @@ import { MediaQueryDirective } from './media-query.directive';
   declarations: [MediaQueryDirective],
   exports: [MediaQueryDirective]
 })
-export class MediaQueryModule { }
+export class BBMediaQueryModule { }

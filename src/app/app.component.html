@@ -1,9 +1,17 @@
 <nav bb-nav-bar
 	class="nav-bar"
+	#navBar="bbNavBar"
 	[panelAnimations]="navBarAnimations">
-	<a *dvk-content class="nav-link" routerLink="/collapsing">Collapsing Menu</a>
-	<a *dvk-content class="nav-link" routerLink="/dropdown">Dropdown Menu</a>
-	<a *dvk-content class="nav-link" routerLink="/draganddrop">Drag And Drop</a>
+	<a *bb-nav-item class="nav-link" routerLink="/collapsing">Collapsing Menu</a>
+	<a *bb-nav-item class="nav-link" routerLink="/dropdown">Dropdown Menu</a>
+	<a *bb-nav-item class="nav-link" routerLink="/draganddrop">Drag And Drop</a>
+
+	<a *bb-nav-item-right class="nav-link" routerLink="/draganddrop">Right Thing 1</a>
+	<a *bb-nav-item-right class="nav-link" routerLink="/draganddrop">Right Thing 2</a>
+	<div bb-toggle>
+		<span *ngIf="navBar.isOpen$ | async" class="material-icons">expand_less</span>
+		<span *ngIf="!(navBar.isOpen$ | async)" class="material-icons">expand_more</span>
+	</div>
 </nav>
 <div class="content">
 <router-outlet></router-outlet>

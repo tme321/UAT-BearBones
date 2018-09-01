@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BBToggle } from './toggle.component';
+import { BBToggleDirective } from './toggle.directive';
 
 @NgModule({
   imports: [
@@ -8,11 +9,13 @@ import { BBToggle } from './toggle.component';
   ],
   
   declarations: [
-    BBToggle
+    BBToggle,
+    BBToggleDirective
   ],
   
   exports: [
-	  BBToggle
+    BBToggle,
+    //BBToggleDirective
   ]
 })
 export class BBToggleModule { }

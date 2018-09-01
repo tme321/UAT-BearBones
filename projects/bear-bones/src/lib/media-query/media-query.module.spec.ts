@@ -1,10 +1,10 @@
-import { MediaQueryModule } from './media-query.module';
+import { BBMediaQueryModule } from './media-query.module';
 
 describe('MediaQueryModule', () => {
-  let mediaQueryModule: MediaQueryModule;
+  let mediaQueryModule: BBMediaQueryModule;
 
   beforeEach(() => {
-    mediaQueryModule = new MediaQueryModule();
+    mediaQueryModule = new BBMediaQueryModule();
   });
 
   it('should create an instance', () => {
