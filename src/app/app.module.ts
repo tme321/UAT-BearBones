@@ -17,6 +17,7 @@ import { DemoDropdownInputService } from './demo-dropdown-service/demo-dropdown-
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 
 import { BBCollapsingMenuModule, BBCommonModule, BBDragAndDropModule,  BBDropdownMenuModule, BBHamburgerMenuModule, BBMultiSelectModule, BBSlideoutMenuModule, BBSlidingPanelModule,  BBAlternatingPanelModule, BBContentConductorModule, BBNavBarModule } from '@uat/bear-bones';
+import { CssMapperModule } from '@uat/bear-bones';
 //BBDropdownInputModule,  BBDynamicAnimationsModule, BBDynamicComponentModule, BBDropdownInputServiceToken,
 import { DynamicAnimationsModule, ContentConductorModule } from '@uat/dvk';
 
@@ -85,6 +86,7 @@ function dddisFactory() {
 
     BBNavBarModule,
 
+    CssMapperModule,
     DynamicAnimationsModule.forRoot(),
     ContentConductorModule.forRoot()
   ],

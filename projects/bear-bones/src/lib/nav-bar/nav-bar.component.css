@@ -1,38 +1,40 @@
+:host {
+    display: block !important;
+}
+
 div.bb-nav-bar {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-
+    position: relative;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    overflow: visible !important;
 }
 
-.static, .left, .right {
-    display: flex;
-    flex-direction: row;
-}
-
-.right {
-    position: absolute;
-    right: 0;
-}
-
-.panel, .top, .bottom {
-    display: flex;
-    flex-direction: column;
-}
-
-.panel {
+.bb-dropdown {
     position: absolute;
     top:100%;
     left:0;
     right:0;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.toggle {
-    position: absolute;
-    right:0;
+.bb-nav-left {
+    display: flex;
+}
+
+.bb-nav-toggle,
+.bb-nav-right {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+
+.bb-nav-top, 
+.bb-nav-bottom {
+    display:flex;
+    flex-direction: column;
 }

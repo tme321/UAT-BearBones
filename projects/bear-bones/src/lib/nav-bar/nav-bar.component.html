@@ -1,30 +1,53 @@
-<div class="bb-nav-bar" 
+
+<div class="bb-nav-bar"
+  #navBar
+  dvk-cm-node="menu" 
   [bb-mq]="expandOnQuery" 
   [event$]="expandEvent$">
 
-  <div class="static" #static>
-    <ng-container dvk-content-container="static"></ng-container>
+  <div *ngIf="!(isExpanded$ | async) && hasToggleLeftDirective"
+    class="bb-nav-left-toggle" 
+    dvk-cm-node="toggle">
+    <ng-content select="[bb-nav-left-toggle]"></ng-content>
   </div>
-  <div class="left" #fixedLeft>
+
+  <div class="static" dvk-cm-node="brand">
+      <ng-content select="[bb-static]"></ng-content>
+  </div>  
+
+  <div *ngIf="!(isExpanded$ | async) && hasToggleAbDirective"
+    class="bb-nav-ab-toggle" 
+    dvk-cm-node="toggle">
+    <ng-content select="[bb-nav-ab-toggle]"></ng-content>
+  </div>
+
+  <div class="bb-nav-left" dvk-cm-node="items-left">
     <ng-container dvk-content-container="fixed-left"></ng-container>
   </div>
-  <div class="right" #fixedRight>
+
+  <div class="bb-nav-right" dvk-cm-node="items-right">
     <ng-container dvk-content-container="fixed-right"></ng-container>
   </div>
-  <a *ngIf="!(isExpanded$ | async)" 
-    class="toggle"
-    (click)="toggle$.next()"><ng-content select="[bb-toggle]"></ng-content></a>
+
+  <div *ngIf="!(isExpanded$ | async) && hasToggleDirective"
+        class="bb-nav-toggle" 
+        dvk-cm-node="toggle">
+        <ng-content select="[bb-nav-toggle]"></ng-content>
+  </div>
+
+  <div class="bb-dropdown"
+    dvk-cm-node="dropdown" 
+    dvk-da
+    [state]="panelState$ | async"
+    [animations]="panelAnimations"
+    [cssMap]="animationsCssMap">
+    <div class="bb-nav-top" dvk-cm-node="items-top">
+      <ng-container dvk-content-container="panel-top"></ng-container>
+    </div>
+    <div class="bb-nav-bottom" dvk-cm-node="items-bottom">
+      <ng-container dvk-content-container="panel-bottom"></ng-container>
+    </div>
+  </div>
+
 </div>
 
-<div #panel
-  class="panel" 
-  dvk-da
-  [state]="panelState$ | async"
-  [animations]="panelAnimations">
-  <div class="top" #panelLeft>
-    <ng-container dvk-content-container="panel-top"></ng-container>
-  </div>
-  <div class="bottom" #panelRight>
-    <ng-container dvk-content-container="panel-bottom"></ng-container>
-  </div>
-</div>

@@ -6,6 +6,13 @@ import { NavigationLink } from './menu-items/menu-items.components';
 import { NavigationLinkModel } from './menu-items/menu-items.interfaces';
 import { Subject } from 'rxjs';
 import { transition, animate, state, style } from '@angular/animations';
+import { BBCssMap, StateCssMap } from '@uat/bear-bones';
+
+
+/*
+ * Maybe name library Chameleon since the components can look like other
+ * CSS framework components?  @uat/ComponentChameleon ?
+ */
 
 @Component({
   selector: 'app-root',
@@ -32,6 +39,36 @@ export class AppComponent {
     })
     */
   }
+
+  bulmaNavbarCssMap: BBCssMap = {
+		'navbar': ['navbar','is-fixed-top'],
+		'menu': ['navbar-menu', 'has-background-grey-dark'],
+    'brand': 'navbar-brand',
+    'dropdown': ['has-background-grey-dark'],
+  };
+  
+  bootstrapNavbarCssMap: BBCssMap = {
+		'menu': ['navbar', 'navbar-expand-lg', 'navbar-dark', 'bg-dark'],
+    'brand': 'navbar-brand',
+		'dropdown': ['collapse', 'navbar-collapse', 'show', 'bg-dark', 'inherit-padding'],
+	};
+
+  foundationNavbarCssMap: BBCssMap = {
+    'brand': 'menu-text',
+    'dropdown': ['top-bar', 'inherit-padding'],
+    'items-top':'top-bar-left',
+    'items-bottom':'top-bar-left',
+  };
+  
+  foundationNavbarStateCssMap: StateCssMap = {
+    'expanded': {
+      'menu': 'top-bar',
+    },
+    'collapsed': { 
+      'menu': 'title-bar'
+    }
+  };
+
 
   trans = {
     'open': { 'closed':  upSlide},

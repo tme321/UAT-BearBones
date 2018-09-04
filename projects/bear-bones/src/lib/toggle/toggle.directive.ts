@@ -8,4 +8,5 @@ import { Directive } from '@angular/core';
   selector: '[bb-toggle]'
 })
 export class BBToggleDirective {
+  constructor() { console.log('toggle constructor');}
 }

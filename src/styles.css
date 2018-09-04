@@ -2,6 +2,9 @@
 @import url("./css/menu.css");
 @import url("./css/styles.css");
 
+.inherit-padding {
+    padding: inherit;
+}
 
 /* Testing styles, REMOVE */
 div.alt-panel {
@@ -16,8 +19,3 @@ div.bb-open {
 div.bb-closed {
     /* height: 0px; */
 }
-
-
-.panel {
-    background-color: #444444;
-} 

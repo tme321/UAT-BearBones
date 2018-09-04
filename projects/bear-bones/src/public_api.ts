@@ -21,3 +21,6 @@ export * from './lib/tab/index';
 
 // everything (is this necessary?)
 //export * from './lib/bear-bones.module';
+
+// DVK
+export * from './lib/css-mapper/index';
