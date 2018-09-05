@@ -14,11 +14,131 @@ import { NavEndContainerDirective } from './nav-end-container/nav-end-container.
 import { StateCssMapperDirective } from '../css-mapper/state-css-mapper/state-css-mapper.directive';
 import { NavBarToggleDirective, NavBarLeftToggleDirective, NavBarAfterBrandToggleDirective } from './nav-bar-toggle/nav-bar-toggle.directive';
 
-
-
-
 /**
+ * A responsive horizontal container that can hold arbitrary content.
  * 
+ * ## **Selector**
+ * 
+ * The NavBarComponent can be attached to a `<div>` or `<nav>` element 
+ * with the `bb-nav-bar` selector.
+ * 
+ * ## **Responsive States**
+ * 
+ * The NavBar has 2 states that it toggles between.  The 'expanded' state 
+ * and the 'collapsed' state.  The state is determined by a media query 
+ * specified by the `expandOnQuery` `@Input` and is evaluated when the `expandEvent$` 
+ * Observable `@Input` is triggered.  See {@link MediaQueryDirective} for more 
+ * information.
+ * 
+ * ## **Layout**
+ * 
+ * The NavBar is broken up into 9 layout containers.  
+ * 
+ * The host element contains the main `<div>` menu element.  This element
+ * contains 6 of the layout containers.  When the NavBar is expanded all of
+ * the content is contained inside this menu element.
+ * 
+ * The menu element has a container for the static brand content which is 
+ * displayed regardless of the state of the NavBar.
+ * 
+ * The menu has 2 containers for content when it is expanded.  The two 
+ * containers represent the left and right justified, following the brand, 
+ * content when in the `expanded` state and the top and bottom justified
+ * content when in the `collapsed` state.  The contents of these containers is
+ * specified with two structural directives `*bb-nav-begin` and `*bb-nav-end`.
+ * 
+ * The menu bar also contains 3 different locations for a toggle.  The toggle 
+ * only exists when the NavBar is in the `collapsed` state.  The 3 locations are
+ * specified with 3 different directives: `bb-nav-toggle`, `bb-nav-left-toggle`, 
+ * and `bb-nav-ab-toggle`. The `bb-nav-toggle` toggle represents the standard 
+ * right justified position for a toggle when `collapsed`. The `bb-nav-left-toggle` toggle inserts
+ * the toggle left justified before the brand when `collapsed`.  And the 
+ * `bb-nav-toggle` toggle puts the toggle immediately after the brand when 
+ * the Navbar is `collapsed`.
+ * 
+ * When the NavBar is `collapsed` the toggle controls an animated panel that
+ * displays the `*bb-nav-begin` specified content on top and the `*bb-nav-end`
+ * on the bottom.
+ * 
+ * ## **Dropdown Animations**
+ * 
+ * The panel animations are specified with a `panelAnimations` `@Input` and
+ * the `animationsCssMap` `@Input`.  The animated panel has 2 states: `open` 
+ * and `closed`.  See the [@uat/dvk Dynamic Animations]{@link https://tme321.github.io/UAT-DynamicViewKit/additional-documentation/dynamic-animations.html} 
+ * documentation for more information.
+ * 
+ * ## **Custom Styling**
+ * 
+ * The NavBarComponent also supports [CSS Mappings]{@link https://tme321.github.io/UAT-DynamicViewKit/additional-documentation/css-mapper.html}
+ * and [State CSS Mappings]{@link https://tme321.github.io/UAT-DynamicViewKit/additional-documentation/state-css-mapper.html}
+ * with the elements targetable with these strings:
+ * 
+ * host element: `navbar`
+ * menu element: `menu`
+ * all toggle containers: `toggle`
+ * brand container: `brand`
+ * left justified menu content container: `items-left`
+ * right justified menu content container: `items-right`
+ * top justified menu content container: `items-top`
+ * bottom justified menu content container: `items-bottom`
+ * dropdown container: `dropdown`
+ * 
+ * And the valid states as `expanded` and `collapsed`.
+ * 
+ * ## **Example**
+ * 
+ * ###### **Note**
+ * This example includes specifying every possible option.
+ * Most use cases will not require using all of the features 
+ * available.
+ * 
+ * ```html
+ *  <nav bb-nav-bar
+ *  	#navBar="bbNavBar"
+ *  	expandOnQuery="(min-width : 1088px)"
+ *    [expandEvent$]="fromEvent(window,'resize')"
+ *  	[bb-css-map]="{ 'navbar': 'nav' }"
+ *    [bb-state-css-map]="{
+ *          'expanded': {
+ *            'menu': 'is-expanded',
+ *          },
+ *          'collapsed': { 
+ *            'menu': 'is-collapsed'
+ *          }
+ *    }"
+ *  	[panelAnimations]="[
+ *      transition('open<=>closed',animate('150ms')),
+ *      state('open',style({
+ *        'transform-origin': 'top',
+ *        'transform': 'scaleY(1.0)'
+ *      })),
+ *      state('closed',style({
+ *        'transform-origin': 'top',
+ *        'transform': 'scaleY(0.0)'
+ *      })),
+ *      state('void',style({
+ *        'transform-origin': 'top',
+ *        'transform': 'scaleY(0.0)'
+ *      }))
+ *    ]" 
+ *    [animationsCssMap]= "{ 'open': 'is-open', 'closed': 'is-closed' }">
+ *  
+ *  	<span bb-brand >NavBar Brand</span>
+ *  	
+ *  	<div *bb-nav-begin>
+ *  		<a routerLink="/someUrl">A Link</a>
+ *  		<app-component></app-component>
+ *  	</div>
+ *  	<div *bb-nav-end>
+ *  		<a routerLink="/login">Login Thing 2</a>
+ *  	</div>
+ *  
+ *  	<div bb-nav-toggle>
+ *  		<span>Toggle</span>
+ *  	</div>
+ *  
+ *  </nav>
+ * ```
  */
 @Component({
   selector: 'div[bb-nav-bar] | nav[bb-nav-bar]',
@@ -106,11 +226,14 @@ export class NavBarComponent implements OnInit, AfterViewInit, AfterContentInit,
 
   /**
    * A string as a media query.  When this media query is 
-   * evaluted as true the panel will be in the expanded state 
+   * evaluted as true the panel will be in the `expanded` state 
    * where the menu items are displayed inside the bar.
    * 
-   * When it is false the items will be put inside a panel 
-   * that opens and closes controlled by the toggle.
+   * When it is false the panel will be in the `collapsed` state 
+   * where the items will be put inside a panel that opens and closes 
+   * controlled by the toggle.
+   * 
+   * See {@link {@link MediaQueryDirective} for more information. 
    * 
    * @default "(min-width : 1024px)"
    */
@@ -316,4 +439,3 @@ export class NavBarComponent implements OnInit, AfterViewInit, AfterContentInit,
     });
   }
 }
-

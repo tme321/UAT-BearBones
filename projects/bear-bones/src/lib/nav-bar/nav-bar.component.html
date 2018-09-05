@@ -1,4 +1,3 @@
-
 <div class="bb-nav-bar"
   #navBar
   dvk-cm-node="menu" 
@@ -11,8 +10,8 @@
     <ng-content select="[bb-nav-left-toggle]"></ng-content>
   </div>
 
-  <div class="static" dvk-cm-node="brand">
-      <ng-content select="[bb-static]"></ng-content>
+  <div dvk-cm-node="brand">
+      <ng-content select="[bb-brand]"></ng-content>
   </div>  
 
   <div *ngIf="!(isExpanded$ | async) && hasToggleAbDirective"
