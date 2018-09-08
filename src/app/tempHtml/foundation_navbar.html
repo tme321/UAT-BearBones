@@ -1,0 +1,26 @@
+<!-- Foundation -->
+<nav bb-nav-bar
+	[bb-css-map]="foundationNavbarCssMap"
+	[dropdownAnimations]="navBarAnimations"
+	[bb-state-css-map]="foundationNavbarStateCssMap">
+
+	<span bb-brand class="menu-text">My NavBar</span>
+	
+	<ul *bb-nav-begin class="vertical large-horizontal menu">
+		<li><a routerLink="/collapsing">Collapsing Menu</a></li>
+		<li><a routerLink="/dropdown">Dropdown Menu</a></li>
+		<li><a routerLink="/draganddrop">Drag And Drop</a></li>
+	</ul>
+	<ul *bb-nav-end class="vertical large-horizontal menu">
+		<li><a routerLink="/draganddrop">Right Thing 1</a></li>
+		<li><a routerLink="/draganddrop">Right Thing 2</a></li>
+	</ul>
+
+	<div bb-nav-left-toggle class="navbar-toggler">
+		<button class="menu-icon"></button>
+	</div>
+
+</nav>
+
+
+	

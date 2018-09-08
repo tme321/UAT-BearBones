@@ -21,11 +21,11 @@
   </div>
 
   <div class="bb-nav-left" dvk-cm-node="items-left">
-    <ng-container dvk-content-container="fixed-left"></ng-container>
+    <ng-container dvk-content-container="menu-left"></ng-container>
   </div>
 
   <div class="bb-nav-right" dvk-cm-node="items-right">
-    <ng-container dvk-content-container="fixed-right"></ng-container>
+    <ng-container dvk-content-container="menu-right"></ng-container>
   </div>
 
   <div *ngIf="!(isExpanded$ | async) && hasToggleDirective"
@@ -37,14 +37,14 @@
   <div class="bb-dropdown"
     dvk-cm-node="dropdown" 
     dvk-da
-    [state]="panelState$ | async"
-    [animations]="panelAnimations"
+    [state]="dropdownState$ | async"
+    [animations]="dropdownAnimations"
     [cssMap]="animationsCssMap">
     <div class="bb-nav-top" dvk-cm-node="items-top">
-      <ng-container dvk-content-container="panel-top"></ng-container>
+      <ng-container dvk-content-container="dropdown-top"></ng-container>
     </div>
     <div class="bb-nav-bottom" dvk-cm-node="items-bottom">
-      <ng-container dvk-content-container="panel-bottom"></ng-container>
+      <ng-container dvk-content-container="dropdown-bottom"></ng-container>
     </div>
   </div>
 

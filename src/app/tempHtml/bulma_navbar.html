@@ -1,0 +1,25 @@
+<!-- Bulma -->
+<nav bb-nav-bar
+	expandOnQuery="(min-width : 1088px)"
+	[bb-css-map]="bulmaNavbarCssMap"
+	[dropdownAnimations]="navBarAnimations">
+
+	<label bb-brand class="navbar-item has-text-white">My NavBar</label>
+	
+	<div *bb-nav-begin class="is-flex-desktop">
+		<a class="navbar-item has-text-white" routerLink="/collapsing">Collapsing Menu</a>
+		<a class="navbar-item has-text-white" routerLink="/dropdown">Dropdown Menu</a>
+		<a class="navbar-item has-text-white" routerLink="/draganddrop">Drag And Drop</a>
+	</div>
+	<div *bb-nav-end class="is-flex-desktop">
+		<a class="navbar-item has-text-white" routerLink="/draganddrop">Right Thing 1</a>
+		<a class="navbar-item has-text-white" routerLink="/draganddrop">Right Thing 2</a>
+	</div>
+
+	<div bb-nav-toggle class="navbar-burger burger has-text-white">
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+
+</nav>

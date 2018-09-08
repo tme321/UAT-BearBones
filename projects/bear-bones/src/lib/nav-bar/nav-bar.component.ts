@@ -4,14 +4,13 @@ import { Observable, Subject, combineLatest, fromEvent, Subscription } from 'rxj
 import { ContentConductorService, ContentContainerDirective, ContentConductor, ContentContainer, Content, StateCSSMap } from '@uat/dvk';
 import { MediaQueryDirective } from '../media-query/media-query.directive';
 import { distinctUntilChanged, map, scan, startWith, tap } from 'rxjs/operators';
-import { stateToggler } from '../common/state-toggler.fn';
+import { stateToggler } from '../common';
 import { NavItemDirective } from './nav-item/nav-item.directive';
 import { NavItemEndDirective } from './nav-item-end/nav-item-end.directive';
-import { CssMapperDirective } from '../css-mapper/css-mapper.directive';
-import { CssMapNodeDirective } from '../css-mapper/css-map-node/css-map-node.directive';
+import { CssMapperDirective, StateCssMapperDirective, CssMapNodeDirective } from '../css-mapper';
 import { NavBeginContainerDirective } from './nav-begin-container/nav-begin-container.directive';
 import { NavEndContainerDirective } from './nav-end-container/nav-end-container.directive';
-import { StateCssMapperDirective } from '../css-mapper/state-css-mapper/state-css-mapper.directive';
+
 import { NavBarToggleDirective, NavBarLeftToggleDirective, NavBarAfterBrandToggleDirective } from './nav-bar-toggle/nav-bar-toggle.directive';
 
 /**
@@ -19,8 +18,8 @@ import { NavBarToggleDirective, NavBarLeftToggleDirective, NavBarAfterBrandToggl
  * 
  * ## **Selector**
  * 
- * The NavBarComponent can be attached to a `<div>` or `<nav>` element 
- * with the `bb-nav-bar` selector.
+ * The NavBarComponent can be attached to a `<div>`, `<nav>`, or `<menu>` 
+ * element with the `bb-nav-bar` selector.
  * 
  * ## **Responsive States**
  * 
@@ -56,14 +55,14 @@ import { NavBarToggleDirective, NavBarLeftToggleDirective, NavBarAfterBrandToggl
  * `bb-nav-toggle` toggle puts the toggle immediately after the brand when 
  * the Navbar is `collapsed`.
  * 
- * When the NavBar is `collapsed` the toggle controls an animated panel that
+ * When the NavBar is `collapsed` the toggle controls an animated dropdown that
  * displays the `*bb-nav-begin` specified content on top and the `*bb-nav-end`
  * on the bottom.
  * 
  * ## **Dropdown Animations**
  * 
- * The panel animations are specified with a `panelAnimations` `@Input` and
- * the `animationsCssMap` `@Input`.  The animated panel has 2 states: `open` 
+ * The dropdown animations are specified with a `dropdownAnimations` `@Input` and
+ * the `animationsCssMap` `@Input`.  The animated dropdown has 2 states: `open` 
  * and `closed`.  See the [@uat/dvk Dynamic Animations]{@link https://tme321.github.io/UAT-DynamicViewKit/additional-documentation/dynamic-animations.html} 
  * documentation for more information.
  * 
@@ -106,7 +105,7 @@ import { NavBarToggleDirective, NavBarLeftToggleDirective, NavBarAfterBrandToggl
  *            'menu': 'is-collapsed'
  *          }
  *    }"
- *  	[panelAnimations]="[
+ *  	[dropdownAnimations]="[
  *      transition('open<=>closed',animate('150ms')),
  *      state('open',style({
  *        'transform-origin': 'top',
@@ -213,10 +212,10 @@ export class NavBarComponent implements OnInit, AfterViewInit, AfterContentInit,
   @ContentChild(NavBarAfterBrandToggleDirective) toggleAbDirective: NavBarAfterBrandToggleDirective;
 
   /**
-   * The animations to apply to the panel as it transitions between the
+   * The animations to apply to the dropdown as it transitions between the
    * `'open'` and `'closed'` states.
    */
-  @Input() panelAnimations: (AnimationTransitionMetadata | AnimationStateMetadata)[] = [];
+  @Input() dropdownAnimations: (AnimationTransitionMetadata | AnimationStateMetadata)[] = [];
 
   /**
    * The map of css classes that will be added and removed as
@@ -226,12 +225,12 @@ export class NavBarComponent implements OnInit, AfterViewInit, AfterContentInit,
 
   /**
    * A string as a media query.  When this media query is 
-   * evaluted as true the panel will be in the `expanded` state 
+   * evaluted as true the NavBar will be in the `expanded` state 
    * where the menu items are displayed inside the bar.
    * 
-   * When it is false the panel will be in the `collapsed` state 
-   * where the items will be put inside a panel that opens and closes 
-   * controlled by the toggle.
+   * When it is false the NavBar will be in the `collapsed` state 
+   * where the items will be put inside a dropdown that opens and 
+   * closes controlled by the toggle.
    * 
    * See {@link {@link MediaQueryDirective} for more information. 
    * 
@@ -248,18 +247,18 @@ export class NavBarComponent implements OnInit, AfterViewInit, AfterContentInit,
   @Input() expandEvent$: Observable<Event> = fromEvent(window,"resize");
 
   /**
-   * A stream of the state of the panel.
+   * A stream of the state of the dropdown.
    * This can be combined with the `exportAs` value `'bbNavBar'`
-   * in order to determinet the state of the panel
-   * from outside the component.
+   * or a `ViewChild` in order to determinet the state of the 
+   * dropdown from outside the component.
    */
   isOpen$: Observable<boolean>;
 
   /**
    * A stream of the media query results.
    * This can be combined with the `exportAs` value `'bbNavBar'`
-   * to determine if the navbar is currently expanded or
-   * collapsed from outside the component.
+   * or a `ViewChild` to determine if the navbar is currently 
+   * expanded or collapsed from outside the component.
    */
   isExpanded$: Observable<boolean>;
 
@@ -273,7 +272,7 @@ export class NavBarComponent implements OnInit, AfterViewInit, AfterContentInit,
    * A stream of states toggling between 'open' and 'closed'
    * @ignore
    */
-  panelState$: Observable<string>;
+  dropdownState$: Observable<string>;
 
   /**
    * @ignore
@@ -319,16 +318,16 @@ export class NavBarComponent implements OnInit, AfterViewInit, AfterContentInit,
   ) { }
 
   /**
-   * Initialize the panel state streams.
+   * Initialize the dropdown state streams.
    * @ignore
    */
   ngOnInit() { 
-    this.panelState$ = this.toggle$.pipe(
+    this.dropdownState$ = this.toggle$.pipe(
       startWith('closed'),
       scan(this.toggler)
     );
 
-    this.isOpen$ = this.panelState$.pipe(
+    this.isOpen$ = this.dropdownState$.pipe(
       map(
         state=>state === 'open'
     ));
@@ -389,13 +388,13 @@ export class NavBarComponent implements OnInit, AfterViewInit, AfterContentInit,
       tap(isMatch=>{
         if(!isMatch) {
           if(this.stateCssMapper){ this.stateCssMapper.next('collapsed'); }
-          this.conductor.moveViews('fixed-left','panel-top');
-          this.conductor.moveViews('fixed-right','panel-bottom');
+          this.conductor.moveViews('menu-left','dropdown-top');
+          this.conductor.moveViews('menu-right','dropdown-bottom');
         }
         else if(isMatch) {
           if(this.stateCssMapper){ this.stateCssMapper.next('expanded'); }
-          this.conductor.moveViews('panel-top', 'fixed-left');
-          this.conductor.moveViews('panel-bottom', 'fixed-right');
+          this.conductor.moveViews('dropdown-top', 'menu-left');
+          this.conductor.moveViews('dropdown-bottom', 'menu-right');
         }
       })
     );

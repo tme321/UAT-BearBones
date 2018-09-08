@@ -5,7 +5,7 @@ import { ContentDirective } from '@uat/dvk';
   selector: '[bb-nav-end]'
 })
 export class NavEndContainerDirective extends ContentDirective {
-  readonly initialContainerName = 'fixed-right';
+  readonly initialContainerName = 'menu-right';
 
   constructor(private tRef: TemplateRef<any>) { super(tRef); }
 }

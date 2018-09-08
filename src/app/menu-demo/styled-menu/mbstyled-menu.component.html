@@ -1,0 +1,36 @@
+<ng-container *ngIf="isBulma()">
+    <div bb-menu
+      [bb-css-map]="bulmaMenuMap" 
+      bb-panel-top 
+      bb-justify-left
+      bb-justify-right
+      [panelAnimations]="menuAnimations">
+
+      <button class="button" bb-toggle>
+          <span>Dropdown button</span>
+          <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+      </button>
+
+      <div bb-menu-content class="dropdown-content">
+        <a class="dropdown-item">
+          Dropdown item
+        </a>
+        <a class="dropdown-item">
+          Other dropdown item
+        </a>
+        <a class="dropdown-item is-active">
+          Active dropdown item
+        </a>
+        <a class="dropdown-item">
+          Other dropdown item
+        </a>
+        <hr class="dropdown-divider">
+        <a class="dropdown-item">
+          With a divider
+        </a>
+      </div>
+
+	  </div>
+</ng-container>

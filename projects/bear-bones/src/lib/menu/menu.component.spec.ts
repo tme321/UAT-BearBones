@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { BBDropdownMenu } from './dropdown-menu.component';
+import { BBMenu } from './menu.component';
 
-describe('BBDropdownMenu', () => {
-  let component: BBDropdownMenu;
-  let fixture: ComponentFixture<BBDropdownMenu>;
+describe('BBMenu', () => {
+  let component: BBMenu;
+  let fixture: ComponentFixture<BBMenu>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BBDropdownMenu ]
+      declarations: [ BBMenu ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BBDropdownMenu);
+    fixture = TestBed.createComponent(BBMenu);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

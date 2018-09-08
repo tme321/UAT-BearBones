@@ -1,0 +1,67 @@
+<ng-container *ngIf="isBulma()">
+  <nav bb-nav-bar
+    expandOnQuery="(min-width : 1088px)"
+    [bb-css-map]="bulmaNavbarCssMap"
+    [dropdownAnimations]="navBarAnimations">
+  
+    <label bb-brand class="navbar-item has-text-white">My NavBar</label>
+    
+    <div *bb-nav-begin class="is-flex-desktop">
+      <a class="navbar-item has-text-white" routerLink="/menu-demo">Menu Demo</a>	
+    </div>
+    <div *bb-nav-end class="is-flex-desktop">
+      <a class="navbar-item has-text-white">Right</a>
+    </div>
+  
+    <div bb-nav-toggle class="navbar-burger burger has-text-white">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  
+  </nav>  
+</ng-container>
+<ng-container *ngIf="isBootstrap()">
+  <nav bb-nav-bar
+    [bb-css-map]="bootstrapNavbarCssMap"
+    [dropdownAnimations]="navBarAnimations">
+    
+    <label bb-brand class="text-light">My NavBar</label>
+  
+    <ul *bb-nav-begin class="navbar-nav">
+      <li class="nav-item">
+          <a class="nav-link text-light" routerLink="/menu-demo">Menu Demo</a>
+      </li>
+    </ul>
+    <ul *bb-nav-end class="navbar-nav">
+      <li>
+        <a class="nav-link text-light">Right</a>
+      </li>
+    </ul>
+  
+    <div bb-nav-toggle class="navbar-toggler">
+      <span class="navbar-toggler-icon text-light"></span>
+    </div>	
+  
+  </nav>
+</ng-container>
+<ng-container *ngIf="isFoundation()">
+  <nav bb-nav-bar
+    [bb-css-map]="foundationNavbarCssMap"
+    [dropdownAnimations]="navBarAnimations"
+    [bb-state-css-map]="foundationNavbarStateCssMap">
+  
+    <span bb-brand class="menu-text">My NavBar</span>
+    
+    <ul *bb-nav-begin class="vertical large-horizontal menu">
+      <li><a routerLink="/menu-demo">Menu Demo</a></li>
+    </ul>
+    <ul *bb-nav-end class="vertical large-horizontal menu">
+      <li><a>Right</a></li>
+    </ul>
+  
+    <div bb-nav-left-toggle class="navbar-toggler">
+      <button class="menu-icon"></button>
+    </div>  
+  </nav>
+</ng-container>

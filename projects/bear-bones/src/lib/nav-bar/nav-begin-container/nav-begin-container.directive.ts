@@ -5,7 +5,7 @@ import { ContentDirective } from '@uat/dvk';
   selector: '[bb-nav-begin]'
 })
 export class NavBeginContainerDirective extends ContentDirective {
-  readonly initialContainerName = 'fixed-left';
+  readonly initialContainerName = 'menu-left';
 
   constructor(private tRef: TemplateRef<any>) { super(tRef); }
 }

@@ -16,10 +16,20 @@ import { FooComponent } from './home/foo.component';
 import { DemoDropdownInputService } from './demo-dropdown-service/demo-dropdown-input.service';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 
-import { BBCollapsingMenuModule, BBCommonModule, BBDragAndDropModule,  BBDropdownMenuModule, BBHamburgerMenuModule, BBMultiSelectModule, BBSlideoutMenuModule, BBSlidingPanelModule,  BBAlternatingPanelModule, BBContentConductorModule, BBNavBarModule } from '@uat/bear-bones';
+//import { BBCollapsingMenuModule, BBDropdownMenuModule, BBHamburgerMenuModule, BBMultiSelectModule, BBSlideoutMenuModule, BBSlidingPanelModule,  BBAlternatingPanelModule, BBContentConductorModule,  } from '@uat/bear-bones';
+
+import { BBDragAndDropModule, BBCommonModule, BBNavBarModule, BBMenuModule, BBToggleModule } from '@uat/bear-bones';
+
 import { CssMapperModule } from '@uat/bear-bones';
 //BBDropdownInputModule,  BBDynamicAnimationsModule, BBDynamicComponentModule, BBDropdownInputServiceToken,
 import { DynamicAnimationsModule, ContentConductorModule } from '@uat/dvk';
+import { ProjTestComponent } from './proj-test/proj-test.component';
+import { ProjContComponent } from './proj-test/proj-cont/proj-cont.component';
+
+
+
+import { MenuDemoModule } from './menu-demo/menu-demo.module';
+import { NavBarDemoModule } from './nav-bar-demo/nav-bar-demo.module';
 
 /*
 const BBModules = [  
@@ -56,7 +66,9 @@ function dddisFactory() {
 	  CollapsingMenuColorWidgetComponent,
     DropdownMenuColorWidgetComponent,
     FooComponent,
-    DragAndDropComponent
+    DragAndDropComponent,
+    ProjTestComponent,
+    ProjContComponent
     
   ],
   imports: [
@@ -68,23 +80,27 @@ function dddisFactory() {
 	  RouterModule,
     AppRoutingModule,
 
+    MenuDemoModule,
+    NavBarDemoModule,
+
 
     
-    BBCollapsingMenuModule, 
+    //BBCollapsingMenuModule, 
     BBCommonModule, 
-    BBDragAndDropModule.forRoot(), 
+    //BBDragAndDropModule.forRoot(), 
     //BBDropdownInputModule.forRoot(), 
-    BBDropdownMenuModule.forRoot(), 
-    BBHamburgerMenuModule.forRoot(), 
-    BBMultiSelectModule.forRoot(), 
-    BBSlideoutMenuModule.forRoot(), 
-    BBSlidingPanelModule.forRoot(),
-    BBContentConductorModule.forRoot(), 
-    BBAlternatingPanelModule.forRoot(), 
+    //BBDropdownMenuModule.forRoot(), 
+    //BBHamburgerMenuModule.forRoot(), 
+    //BBMultiSelectModule.forRoot(), 
+    //BBSlideoutMenuModule.forRoot(), 
+    //BBSlidingPanelModule.forRoot(),
+    //BBContentConductorModule.forRoot(), 
+    //BBAlternatingPanelModule.forRoot(), 
     //BBDynamicAnimationsModule.forRoot(),
     //BBDynamicComponentModule.forRoot(),
-
+    BBToggleModule,
     BBNavBarModule,
+    BBMenuModule,
 
     CssMapperModule,
     DynamicAnimationsModule.forRoot(),

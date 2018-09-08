@@ -1,0 +1,22 @@
+<!-- Bootstrap -->
+<nav bb-nav-bar
+	[bb-css-map]="bootstrapNavbarCssMap"
+	[dropdownAnimations]="navBarAnimations">
+	
+	<label bb-brand class="text-light">My NavBar</label>
+
+	<ul *bb-nav-begin class="navbar-nav">
+		<li class="nav-item"><a class="nav-link text-light" routerLink="/collapsing">Collapsing Menu</a></li>
+		<li class="nav-item"><a class="nav-link text-light" routerLink="/dropdown">Dropdown Menu</a></li>
+		<li class="nav-item"><a class="nav-link text-light" routerLink="/draganddrop">Drag And Drop</a></li>
+	</ul>
+	<ul *bb-nav-end class="navbar-nav">
+		<li><a class="nav-link text-light" routerLink="/draganddrop">Right Thing 1</a></li>
+		<li><a class="nav-link text-light" routerLink="/draganddrop">Right Thing 2</a></li>
+	</ul>
+
+	<div bb-nav-toggle class="navbar-toggler">
+		<span class="navbar-toggler-icon text-light"></span>
+	</div>	
+
+</nav>

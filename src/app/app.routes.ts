@@ -5,11 +5,14 @@ import { CollapsingMenuColorWidgetComponent } from './collapsing-menu-color-widg
 import { DropdownMenuColorWidgetComponent } from './dropdown-menu-color-widget/dropdown-menu-color-widget.component';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 
+import { MenuDemoComponent } from './menu-demo/menu-demo.component';
+
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'collapsing', component: CollapsingMenuColorWidgetComponent },
     { path: 'dropdown', component: DropdownMenuColorWidgetComponent },
-    { path: 'draganddrop', component: DragAndDropComponent }
+    { path: 'draganddrop', component: DragAndDropComponent },
+    { path: 'menu-demo', component: MenuDemoComponent }
 ];
 
 export const appRoutingProviders: any[] = [

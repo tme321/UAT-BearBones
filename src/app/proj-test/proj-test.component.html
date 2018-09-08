@@ -1,0 +1,29 @@
+<h3>Proj</h3>
+<div>
+<h4> No Container </h4>
+<app-proj-cont>
+    <div pc><span >No Container</span></div>
+    <div pc *ngFor="let item of items"><span>Item</span></div>
+</app-proj-cont>
+</div>
+<div>
+<h4> Container </h4>
+<app-proj-cont>
+    <div pc><span>Container Items</span></div>
+  <ng-container pc *ngFor="let item of items">
+    <div><span>Item</span></div>
+  </ng-container>
+</app-proj-cont>
+</div>
+<div>
+<h4> Div </h4>
+<app-proj-cont>
+  <div pc>
+      <div><span>Div Items:</span></div>
+    <div *ngFor="let item of items"><span >Item</span></div>
+  </div>
+</app-proj-cont>
+</div>
+<div>
+  <button (click)="onClick()">Add Item</button>
+</div>
