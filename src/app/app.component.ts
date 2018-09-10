@@ -14,7 +14,7 @@ import { StyleService, Styles } from './style/style.service';
 })
 export class AppComponent {
   constructor(private sServ: StyleService) {
-    this.sServ.setStyle(Styles.Bulma);
+    this.sServ.setStyle(Styles.Foundation);
   }
 }
 

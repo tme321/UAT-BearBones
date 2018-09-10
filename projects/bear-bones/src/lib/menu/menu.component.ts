@@ -4,11 +4,14 @@ import {
   ChangeDetectionStrategy,
   Optional,
   ViewChildren,
+  ViewChild,
   QueryList,
-  ContentChild} from '@angular/core';
+  ContentChild, 
+  ElementRef,
+  ChangeDetectorRef} from '@angular/core';
 import { AnimationTransitionMetadata, AnimationStateMetadata } from '@angular/animations';
-import { Observable, Subject } from 'rxjs';
-import { startWith, scan, tap } from 'rxjs/operators';
+import { Observable, Subject, fromEvent, merge, of } from 'rxjs';
+import { startWith, scan, tap, takeWhile, map, debounce, distinctUntilChanged, debounceTime, skipWhile, mapTo, switchMap, switchAll } from 'rxjs/operators';
 import { StateCSSMap } from '@uat/dvk';
 import { CssMapperDirective, StateCssMapperDirective, CssMapNodeDirective } from '../css-mapper';
 import { PanelTopDirective, PanelBottomDirective, PanelLeftDirective, PanelRightDirective } from './panel-positioning'
@@ -55,6 +58,8 @@ export class BBMenu {
    */
   @ContentChild(PanelRightDirective) right: PanelRightDirective;
 
+  @ViewChild('panel',{read: ElementRef}) panel: ElementRef;
+
   /**
    * A trigger for the button being clicked
    * @ignore
@@ -77,9 +82,12 @@ export class BBMenu {
   @Input() public toggleOnClick = true;
 
   /**
-   * 
+   * Doesn't quite work at the moment.  Maybe 
+   * removed in the future anyway?
+   *@ignore
+   * `@Input()` 
    */
-  @Input() public closeOnClickOutside = true;
+   private closeOnClickOutside = false;
 
   /**
    * The animations to apply to the dropdown as it transitions between the
@@ -97,9 +105,12 @@ export class BBMenu {
    * A stream of states toggling between 'open' and 'closed'
    * @ignore
    */
-  panelState$: Observable<string>;
+  panelState$ = new Observable<string>();
 
-  constructor(    
+  private panelSub = new Subject<string>();
+
+  constructor(   
+    private cd: ChangeDetectorRef,
     @Optional() private cssMapper: CssMapperDirective,
     @Optional() private stateCssMapper: StateCssMapperDirective
     ) { }
@@ -108,10 +119,7 @@ export class BBMenu {
    * @ignore
    */
   ngOnInit() {
-    this.panelState$ = this.toggle$.pipe(
-      startWith('closed'),
-      scan(this.toggler)
-    );
+    this.panelState$ = this.panelSub.asObservable();
   }
 
   /**
@@ -126,9 +134,67 @@ export class BBMenu {
       this.stateCssMapper.init(this.nodes,'menu');
     }
 
-    this.toggle.toggleClicked
-    .subscribe(_=>{ 
-      this.toggle$.next();
+
+    let onHover$ = merge(
+      fromEvent(this.panel.nativeElement,'mouseenter'),
+      this.toggle.toggleEntered)
+      .pipe(
+        takeWhile(()=>this.showOnHover),
+        mapTo('open')
+      );
+
+    let onLeave$ = merge(
+      fromEvent(this.panel.nativeElement,'mouseleave'),
+      this.toggle.toggleLeft)
+      .pipe(
+        takeWhile(()=>this.showOnHover),
+        mapTo('closed')
+      );
+
+    let hoverState$ = merge(
+      onHover$,
+      onLeave$)
+    .pipe(
+      debounceTime(150),
+      distinctUntilChanged()
+    );
+
+    let onClickOutside$ = fromEvent<MouseEvent>(document, 'click')
+      .pipe(
+        takeWhile(()=>this.closeOnClickOutside),
+        mapTo('closed'),
+        tap(x=>{
+          console.log('outside!');
+        })
+    );
+
+          
+    let onClick$ = this.toggle.toggleClicked.pipe(
+      takeWhile(()=>this.toggleOnClick),
+      startWith('closed'),
+      scan(this.toggler),
+    );
+
+    merge(onClickOutside$, onClick$).pipe(
+      distinctUntilChanged(),
+      switchMap((state)=>{
+        console.log('swtichmap click',state);
+        if(state === 'closed') {
+          console.log('mapping to hover',state);
+          return merge(of(state),hoverState$);
+        }
+        else {
+          console.log('mapping to click',state);
+          return of(state);
+        }    
+      })
+    ).subscribe(state=>{
+      console.log('after swtichmap',state);
+      this.panelSub.next(state);
     });
+
+
+    this.cd.detectChanges();
   }
+
 }

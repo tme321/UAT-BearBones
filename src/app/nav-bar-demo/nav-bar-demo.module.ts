@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { NavBarDemoComponent } from './nav-bar-demo.component';
-import { BBToggleModule, BBNavBarModule, CssMapperModule } from '@uat/bear-bones';
+import { BBNavBarModule, CssMapperModule } from '@uat/bear-bones';
 
 @NgModule({
   imports: [
     CommonModule,
+	  RouterModule,
     BBNavBarModule,
     CssMapperModule,
   ],

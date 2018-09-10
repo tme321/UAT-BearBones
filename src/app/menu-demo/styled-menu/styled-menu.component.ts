@@ -21,7 +21,16 @@ export class StyledMenuComponent implements OnInit {
   bulmaMenuMap: BBCssMap = {
     'menu': ['dropdown', 'is-active'],
     'toggle':'dropdown-trigger',
-     'panel':'dropdown-menu'
+    'panel':'dropdown-menu'
+  }
+
+  bootstrapMenuMap: BBCssMap = {
+    'menu': 'dropdown',
+    'panel':'dropdown-menu'
+  }
+
+  foundationMenuMap: BBCssMap = {
+    'panel': ['is-dropdown-submenu', 'first-sub', 'js-dropdown-active'],
   }
 
   makeMenuAnimations(origin: 'top' | 'bottom') {

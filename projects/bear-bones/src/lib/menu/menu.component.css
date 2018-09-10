@@ -11,7 +11,8 @@
     top: unset;
     bottom: unset;
     left: unset;
-    right:unset;
+    right: unset;
+    display: block;
 }
 
 .bb-top {

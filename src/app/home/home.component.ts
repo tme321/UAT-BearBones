@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { NavigationLink } from '../menu-items/menu-items.components';
+//import { NavigationLink } from '../menu-items/menu-items.components';
 //import { DropdownInputItemChosenEvent } from '@uat/bear-bones';
 
 @Component({
@@ -21,8 +21,9 @@ export class HomeComponent implements OnInit {
   }
   */
 
+  /*
   onItemSelected(item: any){ console.log(item); }
   onItemUnselected(item: any){ console.log(item); }
-
+  */
 
 }
