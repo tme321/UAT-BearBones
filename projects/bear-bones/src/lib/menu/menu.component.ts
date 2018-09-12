@@ -8,15 +8,18 @@ import {
   QueryList,
   ContentChild, 
   ElementRef,
-  ChangeDetectorRef} from '@angular/core';
+  ChangeDetectorRef,
+  AfterViewInit,
+  OnDestroy} from '@angular/core';
 import { AnimationTransitionMetadata, AnimationStateMetadata } from '@angular/animations';
-import { Observable, Subject, fromEvent, merge, of } from 'rxjs';
-import { startWith, scan, tap, takeWhile, map, debounce, distinctUntilChanged, debounceTime, skipWhile, mapTo, switchMap, switchAll } from 'rxjs/operators';
+import { Subject, fromEvent, merge, Subscription } from 'rxjs';
+import { takeWhile,distinctUntilChanged, debounceTime, mapTo } from 'rxjs/operators';
 import { StateCSSMap } from '@uat/dvk';
 import { CssMapperDirective, StateCssMapperDirective, CssMapNodeDirective } from '../css-mapper';
 import { PanelTopDirective, PanelBottomDirective, PanelLeftDirective, PanelRightDirective } from './panel-positioning'
 import { ToggleDirective } from '../toggle';
-import { stateToggler } from '../common';
+import { BBToggleService } from '../toggle/toggle.service';
+import { Set, Toggle } from '../toggle/toggle.actions';
 
 @Component({
   selector: '[bb-menu]',
@@ -25,7 +28,17 @@ import { stateToggler } from '../common';
   exportAs:'bbMenu',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BBMenu {
+export class BBMenu implements AfterViewInit, OnDestroy {
+
+  /**
+   * @ignore 
+   */
+  private panelSub = new Subject<string>();
+
+  /**
+   * @ignore
+   */
+  private togglerSub: Subscription;
   
   /**
    * @ignore
@@ -35,8 +48,7 @@ export class BBMenu {
   /**
    * @ignore
    */
-  @ViewChildren(CssMapNodeDirective)
-  nodes: QueryList<CssMapNodeDirective>;
+  @ViewChildren(CssMapNodeDirective) nodes: QueryList<CssMapNodeDirective>;
 
   /**
    * @ignore
@@ -58,18 +70,10 @@ export class BBMenu {
    */
   @ContentChild(PanelRightDirective) right: PanelRightDirective;
 
+  /**
+   * 
+   */
   @ViewChild('panel',{read: ElementRef}) panel: ElementRef;
-
-  /**
-   * A trigger for the button being clicked
-   * @ignore
-   */
-  toggle$ = new Subject<null>();
-
-  /**
-   * @ignore
-   */
-  private toggler = stateToggler({ 'open': 'closed', 'closed':'open'});
 
   /**
    * 
@@ -82,12 +86,9 @@ export class BBMenu {
   @Input() public toggleOnClick = true;
 
   /**
-   * Doesn't quite work at the moment.  Maybe 
-   * removed in the future anyway?
-   *@ignore
-   * `@Input()` 
+   * 
    */
-   private closeOnClickOutside = false;
+  @Input() closeOnClickOutside = false;
 
   /**
    * The animations to apply to the dropdown as it transitions between the
@@ -105,22 +106,14 @@ export class BBMenu {
    * A stream of states toggling between 'open' and 'closed'
    * @ignore
    */
-  panelState$ = new Observable<string>();
-
-  private panelSub = new Subject<string>();
+  panelState$ = this.panelSub.asObservable();
 
   constructor(   
     private cd: ChangeDetectorRef,
+    private tSer: BBToggleService,
     @Optional() private cssMapper: CssMapperDirective,
     @Optional() private stateCssMapper: StateCssMapperDirective
     ) { }
-
-  /**
-   * @ignore
-   */
-  ngOnInit() {
-    this.panelState$ = this.panelSub.asObservable();
-  }
 
   /**
    * @ignore
@@ -134,67 +127,62 @@ export class BBMenu {
       this.stateCssMapper.init(this.nodes,'menu');
     }
 
-
-    let onHover$ = merge(
+    const onHover$ = merge(
       fromEvent(this.panel.nativeElement,'mouseenter'),
       this.toggle.toggleEntered)
       .pipe(
         takeWhile(()=>this.showOnHover),
-        mapTo('open')
-      );
+        mapTo(BBToggleStates.OPEN));
 
-    let onLeave$ = merge(
+    const onLeave$ = merge(
       fromEvent(this.panel.nativeElement,'mouseleave'),
       this.toggle.toggleLeft)
       .pipe(
         takeWhile(()=>this.showOnHover),
-        mapTo('closed')
-      );
+        mapTo(BBToggleStates.CLOSED));
 
-    let hoverState$ = merge(
+    const hoverState$ = merge(
       onHover$,
       onLeave$)
-    .pipe(
-      debounceTime(150),
-      distinctUntilChanged()
-    );
-
-    let onClickOutside$ = fromEvent<MouseEvent>(document, 'click')
       .pipe(
-        takeWhile(()=>this.closeOnClickOutside),
-        mapTo('closed'),
-        tap(x=>{
-          console.log('outside!');
-        })
-    );
+        debounceTime(150),
+        distinctUntilChanged());
 
-          
-    let onClick$ = this.toggle.toggleClicked.pipe(
-      takeWhile(()=>this.toggleOnClick),
-      startWith('closed'),
-      scan(this.toggler),
-    );
+   const onClickOutside$ = fromEvent<MouseEvent>(document, 'click')
+    .pipe(
+      takeWhile(()=>this.closeOnClickOutside),
+      mapTo(new Set(BBToggleStates.CLOSED)));
+ 
+    const onClick$ = this.toggle.toggleClicked
+      .pipe(
+        takeWhile(()=>this.toggleOnClick),
+        mapTo(new Toggle()));
 
-    merge(onClickOutside$, onClick$).pipe(
-      distinctUntilChanged(),
-      switchMap((state)=>{
-        console.log('swtichmap click',state);
-        if(state === 'closed') {
-          console.log('mapping to hover',state);
-          return merge(of(state),hoverState$);
-        }
-        else {
-          console.log('mapping to click',state);
-          return of(state);
-        }    
+    this.togglerSub = this.tSer.createStateToggle$({
+        [BBToggleStates.OPEN]: BBToggleStates.CLOSED,
+        [BBToggleStates.CLOSED]: BBToggleStates.OPEN
+      },
+      BBToggleStates.CLOSED,
+      [onClick$, onClickOutside$],
+      {
+        [BBToggleStates.CLOSED]: hoverState$
       })
-    ).subscribe(state=>{
-      console.log('after swtichmap',state);
+    .subscribe(state=>{
       this.panelSub.next(state);
     });
-
 
     this.cd.detectChanges();
   }
 
+  ngOnDestroy() {
+    if(this.togglerSub && !this.togglerSub.closed) {
+      this.togglerSub.unsubscribe();
+    }
+  }
+
+}
+
+export enum BBToggleStates {
+  OPEN = 'open',
+  CLOSED = 'closed'
 }
