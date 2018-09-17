@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuDemoComponent } from './menu-demo.component';
-import { BBMenuModule, CssMapperModule, BBToggleModule } from '@uat/bear-bones';
+import { BBMenuModule, CssMapperModule, BBToggleModule, BBCommonModule } from '@uat/bear-bones';
 import { StyledMenuComponent } from './styled-menu/styled-menu.component';
 import { LBStyledMenuComponent } from './styled-menu/lbstyled-menu.component';
 import { MBStyledMenuComponent } from './styled-menu/mbstyled-menu.component';
@@ -13,6 +13,7 @@ import { MTStyledMenuComponent } from './styled-menu/mtstyled-menu.component';
 @NgModule({
   imports: [
     CommonModule,
+    BBCommonModule,
     BBMenuModule,
     CssMapperModule,
     BBToggleModule,

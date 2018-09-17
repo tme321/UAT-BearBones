@@ -1,7 +1,7 @@
 <ng-container *ngIf="isBulma()">
   <div bb-menu
     [bb-css-map]="bulmaMenuMap" 
-    bb-panel-top 
+    bb-top 
     bb-justify-right
     [panelAnimations]="menuAnimations">
 
@@ -34,7 +34,7 @@
   <div class="dropdown"
     bb-menu
     [bb-css-map]="bootstrapMenuMap" 
-    bb-panel-top 
+    bb-top 
     bb-justify-right
     [panelAnimations]="menuAnimations">
     <button bb-toggle class="btn btn-secondary dropdown-toggle">
@@ -50,12 +50,10 @@
 <ng-container *ngIf="isFoundation()">
   <div bb-menu
     [bb-css-map]="foundationMenuMap" 
-    bb-panel-top 
+    bb-top 
     bb-justify-right
-    [panelAnimations]="menuAnimations"
-    [showOnHover]="true"
-    [toggleOnClick]="false">
-    <a bb-toggle>Menu</a>
+    [panelAnimations]="menuAnimations">
+    <a class="button" bb-toggle>Menu</a>
     <ul class="menu submenu flex-container flex-dir-column" 
       bb-menu-content>
       <li><a>Item 1A</a></li>

@@ -1,9 +1,10 @@
 import { Directive, Output, EventEmitter, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[bb-toggle]'
+  selector: '[bb-toggle]',
+  exportAs: 'bbToggle'
 })
-export class ToggleDirective {
+export class BBToggleDirective {
   @Output() toggleClicked = new EventEmitter<null>();
   @Output() toggleEntered = new EventEmitter<null>();
   @Output() toggleLeft = new EventEmitter<null>();

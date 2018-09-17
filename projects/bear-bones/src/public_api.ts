@@ -23,6 +23,7 @@ export * from './lib/tab/index';
 export * from './lib/common/index';
 export * from './lib/nav-bar/index';
 export * from './lib/menu/index';
+export * from './lib/side-menu/index';
 export * from './lib/toggle/index';
 
 // DVK

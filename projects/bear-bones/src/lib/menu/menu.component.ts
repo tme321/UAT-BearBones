@@ -1,25 +1,11 @@
-import {
-  Component,
-  Input,
-  ChangeDetectionStrategy,
-  Optional,
-  ViewChildren,
-  ViewChild,
-  QueryList,
-  ContentChild, 
-  ElementRef,
-  ChangeDetectorRef,
-  AfterViewInit,
-  OnDestroy} from '@angular/core';
+import { Component, ChangeDetectionStrategy, ContentChild, AfterViewInit, Optional, ViewChildren, QueryList, ViewChild, ElementRef, Input, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { AnimationTransitionMetadata, AnimationStateMetadata } from '@angular/animations';
-import { Subject, fromEvent, merge, Subscription } from 'rxjs';
-import { takeWhile,distinctUntilChanged, debounceTime, mapTo } from 'rxjs/operators';
+import { Subject, Subscription, Observable, fromEvent, merge } from 'rxjs';
+import { takeWhile, mapTo, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { StateCSSMap } from '@uat/dvk';
-import { CssMapperDirective, StateCssMapperDirective, CssMapNodeDirective } from '../css-mapper';
-import { PanelTopDirective, PanelBottomDirective, PanelLeftDirective, PanelRightDirective } from './panel-positioning'
-import { ToggleDirective } from '../toggle';
-import { BBToggleService } from '../toggle/toggle.service';
-import { Set, Toggle } from '../toggle/toggle.actions';
+import { BBDocumentEventsSourceService, BBToggleStates, PanelTopDirective, PanelBottomDirective, PanelJustifyLeftDirective, PanelJustifyRightDirective } from '../common';
+import { BBToggleDirective, BBToggleService, Toggle, BBToggleActions, SetToggle } from '../toggle';
+import { CssMapNodeDirective, CssMapperDirective, StateCssMapperDirective } from '../css-mapper';
 
 @Component({
   selector: '[bb-menu]',
@@ -33,42 +19,37 @@ export class BBMenu implements AfterViewInit, OnDestroy {
   /**
    * @ignore 
    */
-  private panelSub = new Subject<string>();
+  protected panelSub = new Subject<string>();
 
   /**
    * @ignore
    */
-  private togglerSub: Subscription;
+  protected togglerSub: Subscription;
   
   /**
    * @ignore
    */
-  @ContentChild(ToggleDirective) toggle: ToggleDirective;
+  protected openSub = new Subject();
+
+  /**
+   * @ignore
+   */
+  protected closeSub = new Subject();
+
+  /**
+   * @ignore
+   */
+  protected toggleSources: Observable<BBToggleActions>[] = [];
+
+  /**
+   * @ignore
+   */
+  @ContentChild(BBToggleDirective) toggle: BBToggleDirective;
 
   /**
    * @ignore
    */
   @ViewChildren(CssMapNodeDirective) nodes: QueryList<CssMapNodeDirective>;
-
-  /**
-   * @ignore
-   */
-  @ContentChild(PanelTopDirective) top: PanelTopDirective;
-
-  /**
-   * @ignore
-   */
-  @ContentChild(PanelBottomDirective) bottom: PanelBottomDirective;
-
-  /**
-   * @ignore
-   */
-  @ContentChild(PanelLeftDirective) left: PanelLeftDirective;
-
-  /**
-   * @ignore
-   */
-  @ContentChild(PanelRightDirective) right: PanelRightDirective;
 
   /**
    * 
@@ -109,11 +90,30 @@ export class BBMenu implements AfterViewInit, OnDestroy {
   panelState$ = this.panelSub.asObservable();
 
   constructor(   
-    private cd: ChangeDetectorRef,
-    private tSer: BBToggleService,
-    @Optional() private cssMapper: CssMapperDirective,
-    @Optional() private stateCssMapper: StateCssMapperDirective
-    ) { }
+    protected cd: ChangeDetectorRef,
+    protected tSer: BBToggleService,
+    protected deServ: BBDocumentEventsSourceService,
+    @Optional() protected cssMapper: CssMapperDirective,
+    @Optional() protected stateCssMapper: StateCssMapperDirective,
+    @Optional() public top: PanelTopDirective,
+    @Optional() public bottom: PanelBottomDirective,
+    @Optional() public left: PanelJustifyLeftDirective,
+    @Optional() public right: PanelJustifyRightDirective,  
+    ) {}
+
+  /**
+   * Close the menu
+   */
+  close() {
+    this.closeSub.next();
+  }
+
+  /**
+   * Open the menu
+   */
+  open() {
+    this.openSub.next();
+  }
 
   /**
    * @ignore
@@ -148,22 +148,33 @@ export class BBMenu implements AfterViewInit, OnDestroy {
         debounceTime(150),
         distinctUntilChanged());
 
-   const onClickOutside$ = fromEvent<MouseEvent>(document, 'click')
-    .pipe(
-      takeWhile(()=>this.closeOnClickOutside),
-      mapTo(new Set(BBToggleStates.CLOSED)));
- 
-    const onClick$ = this.toggle.toggleClicked
+    const click$ = this.toggle.toggleClicked
       .pipe(
         takeWhile(()=>this.toggleOnClick),
         mapTo(new Toggle()));
+
+    this.toggleSources.push(click$);
+  
+
+    const open$ = this.openSub.pipe(
+      mapTo(new SetToggle(BBToggleStates.OPEN)));
+
+    const close$ = this.closeSub.pipe(
+      mapTo(new SetToggle(BBToggleStates.CLOSED)));
+  
+    const clickOutside$ = this.deServ.click$
+      .pipe(
+       takeWhile(()=>this.closeOnClickOutside),
+       mapTo(new SetToggle(BBToggleStates.CLOSED)));
+ 
+    this.toggleSources.push(clickOutside$, open$, close$);
 
     this.togglerSub = this.tSer.createStateToggle$({
         [BBToggleStates.OPEN]: BBToggleStates.CLOSED,
         [BBToggleStates.CLOSED]: BBToggleStates.OPEN
       },
       BBToggleStates.CLOSED,
-      [onClick$, onClickOutside$],
+      this.toggleSources,
       {
         [BBToggleStates.CLOSED]: hoverState$
       })
@@ -174,15 +185,12 @@ export class BBMenu implements AfterViewInit, OnDestroy {
     this.cd.detectChanges();
   }
 
+  /**
+   * @ignore
+   */
   ngOnDestroy() {
     if(this.togglerSub && !this.togglerSub.closed) {
       this.togglerSub.unsubscribe();
     }
   }
-
-}
-
-export enum BBToggleStates {
-  OPEN = 'open',
-  CLOSED = 'closed'
 }

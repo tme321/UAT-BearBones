@@ -1,0 +1,12 @@
+.menus-container {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 400px;
+}
+
+.menu-row {
+    display: flex;
+    width:100%;
+    justify-content: space-between;
+}

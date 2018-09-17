@@ -1,0 +1,24 @@
+.bb-slide-menu-container {
+    position: relative;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+}
+
+.bb-panel {
+    position: absolute;
+    top: 0;
+    bottom: unset;
+    display: block;
+    left: unset;
+    right: unset;
+}
+
+.bb-left {
+    right:100%;
+}
+
+.bb-right {
+    left:100%
+}

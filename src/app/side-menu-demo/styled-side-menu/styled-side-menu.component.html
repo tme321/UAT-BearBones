@@ -1,0 +1,35 @@
+<ng-container *ngIf="isBulma()">
+  <div>    
+      <button class="button" bb-toggle #oToggle="bbToggle">
+        <span>Menu</span>
+      </button>
+    </div>
+    <div bb-side-menu
+    [bb-css-map]="bulmaMenuMap" 
+    [panelAnimations]="menuAnimations"
+    [toggle]="oToggle">
+  
+    <div bb-menu-content class="dropdown-content">
+      <a class="dropdown-item">
+        Dropdown item
+      </a>
+      <a class="dropdown-item">
+        Other dropdown item
+      </a>
+      <a class="dropdown-item is-active">
+        Active dropdown item
+      </a>
+      <a class="dropdown-item">
+        Other dropdown item
+      </a>
+      <hr class="dropdown-divider">
+      <a class="dropdown-item">
+        With a divider
+      </a>
+    </div>
+  </div>  
+</ng-container>
+<ng-container *ngIf="isBootstrap()">
+</ng-container>
+<ng-container *ngIf="isFoundation()">
+</ng-container>

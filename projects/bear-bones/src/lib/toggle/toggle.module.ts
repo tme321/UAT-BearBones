@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ToggleDirective } from './toggle.directive';
+import { BBToggleDirective } from './toggle.directive';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [ToggleDirective],
-  exports: [ToggleDirective]
+  declarations: [BBToggleDirective],
+  exports: [BBToggleDirective]
 })
-export class BBToggleModule { }
+export class BBToggleModule {
+}

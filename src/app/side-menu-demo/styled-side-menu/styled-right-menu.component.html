@@ -1,0 +1,66 @@
+<ng-container *ngIf="isBulma()">
+    <div class="side-menu has-background-grey-dark">
+      <div bb-side-menu
+        bb-left
+        [bb-css-map]="bulmaMenuMap" 
+        [panelAnimations]="menuAnimations">
+  
+        <button class="button" bb-toggle>
+            <span>Menu</span>
+        </button>
+  
+        <div bb-menu-content class="dropdown-content">
+          <a class="dropdown-item">
+            Dropdown item
+          </a>
+          <a class="dropdown-item">
+            Other dropdown item
+          </a>
+          <a class="dropdown-item is-active">
+            Active dropdown item
+          </a>
+          <a class="dropdown-item">
+            Other dropdown item
+          </a>
+          <hr class="dropdown-divider">
+          <a class="dropdown-item">
+            With a divider
+          </a>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="isBootstrap()">
+    <div class="side-menu bg-dark">
+      <div bb-side-menu
+        bb-left
+        [bb-css-map]="bootstrapMenuMap"  
+        [panelAnimations]="menuAnimations">
+        <button bb-toggle class="btn btn-secondary dropdown-toggle">
+          Menu
+        </button>
+        <div bb-menu-content>
+          <a class="dropdown-item">Action</a>
+          <a class="dropdown-item">Another action</a>
+          <a class="dropdown-item">Something else here</a>
+        </div>
+      </div>  
+    </div>
+  </ng-container>
+  <ng-container *ngIf="isFoundation()">
+    <div class="side-menu fndt-light-grey">
+      <div bb-side-menu
+        [bb-css-map]="foundationMenuMap" 
+        bb-left
+        [panelAnimations]="menuAnimations">
+        <a class="button" bb-toggle>Menu</a>
+        <ul class="menu submenu flex-container flex-dir-column" 
+          bb-menu-content>
+          <li><a>Item 1A</a></li>
+          <li><a>Item 2</a></li>
+          <li><a>Item 3</a></li>
+          <li><a>Item 4</a></li>
+        </ul>
+      </div>
+    </div>
+  </ng-container>

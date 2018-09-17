@@ -1,0 +1,13 @@
+.menu-bar {
+    display:flex;
+    width:250px;
+    justify-content: flex-end;
+}
+
+.side-menu {
+    height: 200px;
+}
+
+.fndt-light-grey {
+    background-color: #e6e6e6;
+}

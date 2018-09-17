@@ -1,6 +1,6 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[bb-panel-top]'
+  selector: '[bb-top]'
 })
 export class PanelTopDirective {}

@@ -1,0 +1,21 @@
+<div class="bb-slide-menu-container" 
+  dvk-cm-node="container">
+  <div class="bb-toggle"
+  *ngIf="toggle"
+    dvk-cm-node="toggle">
+    <ng-content select="[bb-toggle]"></ng-content>
+  </div>
+  <div class="bb-panel"
+    #panel
+    dvk-cm-node="panel" 
+    dvk-da
+    [class.bb-left]="left"
+    [class.bb-right]="right"
+    [state]="panelState$ | async"
+    [animations]="panelAnimations"
+    [cssMap]="animationsCssMap">
+    <ng-content select="[bb-menu-content]"></ng-content>
+  </div>
+</div>
+<!--
+-->

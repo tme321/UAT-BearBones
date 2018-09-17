@@ -1,3 +1,4 @@
+import { FooComponent } from './home/foo.component';
 import { Component } from '@angular/core';
 import { StyleService, Styles } from './style/style.service';
 
@@ -14,7 +15,7 @@ import { StyleService, Styles } from './style/style.service';
 })
 export class AppComponent {
   constructor(private sServ: StyleService) {
-    this.sServ.setStyle(Styles.Foundation);
+    this.sServ.setStyle(Styles.Bulma);
   }
 }
 

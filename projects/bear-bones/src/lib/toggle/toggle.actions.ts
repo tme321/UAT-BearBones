@@ -6,10 +6,10 @@ export enum BBToggleActionTypes {
 
 export class Init { readonly type=BBToggleActionTypes.INIT; }
 export class Toggle { readonly type=BBToggleActionTypes.TOGGLE; }
-export class Set {
+export class SetToggle {
     readonly type=BBToggleActionTypes.SET;
     constructor(public payload:string) {}
 }
 
-export type BBToggleActions = Init | Toggle | Set;
+export type BBToggleActions = Init | Toggle | SetToggle;
 

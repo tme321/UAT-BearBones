@@ -2,6 +2,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MenuDemoComponent } from './menu-demo/menu-demo.component';
+import { SideMenuDemoComponent } from './side-menu-demo/side-menu-demo.component';
 
 
 /*
@@ -15,7 +16,8 @@ export const routes: Routes = [
     //{ path: 'collapsing', component: CollapsingMenuColorWidgetComponent },
     //{ path: 'dropdown', component: DropdownMenuColorWidgetComponent },
     //{ path: 'draganddrop', component: DragAndDropComponent },
-    { path: 'menu-demo', component: MenuDemoComponent }
+    { path: 'menu-demo', component: MenuDemoComponent },
+    { path:'side-menu-demo', component: SideMenuDemoComponent },
 ];
 
 export const appRoutingProviders: any[] = [

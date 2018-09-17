@@ -12,6 +12,7 @@ import { CssMapperModule } from '@uat/bear-bones';
 import { DynamicAnimationsModule, ContentConductorModule } from '@uat/dvk';
 import { MenuDemoModule } from './menu-demo/menu-demo.module';
 import { NavBarDemoModule } from './nav-bar-demo/nav-bar-demo.module';
+import { SideMenuDemoModule } from './side-menu-demo/side-menu-demo.module';
 
 
 //import { BBCollapsingMenuModule, BBDropdownMenuModule, BBHamburgerMenuModule, BBMultiSelectModule, BBSlideoutMenuModule, BBSlidingPanelModule,  BBAlternatingPanelModule, BBContentConductorModule,  } from '@uat/bear-bones';
@@ -87,6 +88,7 @@ function dddisFactory() {
 
     MenuDemoModule,
     NavBarDemoModule,
+    SideMenuDemoModule,
     
     /*
     BBCommonModule, 
